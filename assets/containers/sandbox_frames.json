@@ -1,0 +1,6 @@
+{
+  "frames": {
+    "frame_1": { "frame": { "x": -10, "y": 0, "w": 205, "h": 95 } }
+  },
+  "meta": { "image": "spritesheet.png" }
+}

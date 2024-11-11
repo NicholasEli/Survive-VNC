@@ -1,0 +1,11 @@
+import ITEMS from './ITEMS.js';
+import CONTAINERS from './CONTAINERS.js';
+
+const CRAFT = {
+	CAMPFIRE: {
+		INGREDIENTS: [ITEMS.FIREWOOD, ITEMS.AXE, ITEMS.ROCK],
+		CONTAINER: CONTAINERS.CAMPFIRE
+	}
+};
+
+export default CRAFT;

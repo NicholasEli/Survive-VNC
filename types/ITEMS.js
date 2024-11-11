@@ -1,0 +1,12 @@
+const ITEMS = {
+	ASH: 'ASH',
+	AXE: 'AXE',
+	FIRE: 'FIRE',
+	FIREWOOD: 'FIREWOOD',
+	MEAT_COOKED: 'MEAT_COOKED',
+	MEAT_RAW: 'MEAT_RAW',
+	ROCK: 'ROCK',
+	SHOVEL: 'SHOVEL'
+};
+
+export default ITEMS;

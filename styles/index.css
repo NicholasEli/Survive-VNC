@@ -1,0 +1,61 @@
+@font-face {
+	font-family: 'arcade';
+	src: url('../assets/arcade.TTF') format('truetype');
+}
+
+:root {
+	font-size: 18px;
+
+	--blue-300: #3ca3b2;
+	--blue-700: #205c81;
+	--brown-700: #443429;
+	--green-100: #6fbb49;
+	--green-500: #479757;
+	--green-800: #14655a;
+	--red-500: #e74c3c;
+	--red-700: #c0392b;
+	--orange-300: #e67e22;
+	--purple-500: #9b59b6;
+	--purple-700: #8e44ad;
+	--tan-100: #f4c798;
+	--tan-300: #f5b885;
+	--tan-400: #d19a72;
+	--tan-500: #b37f5a;
+	--yellow-300: #f1c40f;
+	--yellow-700: #f39c12;
+
+	--font-arcade: 'arcade';
+
+	--sm: 640px;
+	--md: 960px;
+	--lg: 1200px;
+	--xl: 1600px;
+}
+
+html,
+body,
+main {
+	width: 100vw;
+	overflow-x: hidden;
+}
+
+main {
+	position: relative;
+}
+
+.toastify {
+	font-family: var(--font-arcade);
+	letter-spacing: 1px;
+	border: 2px solid var(--brown-700);
+	border-radius: 10px;
+}
+
+/** Classes **/
+.wrapper {
+	width: 100%;
+	padding: 1rem;
+}
+
+.hidden {
+	display: none !important;
+}

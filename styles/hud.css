@@ -1,0 +1,117 @@
+header {
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding: 0.5rem;
+}
+
+.player__attributes {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.player__attributes box-icon {
+	width: auto;
+	height: 20px;
+}
+
+.player__attribute {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.player__attribute [data-attribute] {
+	width: 150px;
+	height: 20px;
+	position: relative;
+	box-shadow: 2px 2px 2px #000;
+}
+
+.player__attribute [data-attribute] span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	font-size: 0.5rem;
+	color: #fff;
+	font-family: var(--font-arcade);
+	text-shadow: 2px 2px 2px #000;
+}
+
+.player__attribute [data-attribute] div {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+[data-attribute='health'] {
+	background-color: #27ae60;
+}
+
+[data-attribute='health'] div {
+	background-color: #2ecc71;
+}
+
+[data-attribute='thirst'] {
+	background-color: #2980b9;
+}
+
+[data-attribute='thirst'] div {
+	background-color: #3498db;
+}
+
+[data-attribute='hunger'] {
+	background-color: #8e44ad;
+}
+
+[data-attribute='hunger'] div {
+	background-color: #9b59b6;
+}
+
+[data-attribute='illness'],
+[data-attribute='temperature'] {
+	width: auto;
+}
+
+.player__actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+}
+
+.player__actions button {
+	padding: 0.5rem;
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+.player__actions button svg {
+	width: auto;
+	height: 50px;
+}
+
+.player__actions button svg * {
+	stroke: #fff;
+	fill: #34495e;
+}
+
+@media (min-width: 960px) {
+	.player__attribute [data-attribute] {
+		width: 200px;
+		height: 30px;
+	}
+
+	.player__attribute [data-attribute] span {
+		font-size: 0.75rem;
+	}
+}

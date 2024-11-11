@@ -1,0 +1,9 @@
+{
+  "frames": {
+    "frame_1": { "frame": { "x": 0, "y": 40, "w": 90, "h": 180 } },
+    "frame_2": { "frame": { "x": 0, "y": 280, "w": 90, "h": 180 } },
+    "frame_3": { "frame": { "x": 0, "y": 520, "w": 90, "h": 180 } },
+    "frame_4": { "frame": { "x": 0, "y": 760, "w": 90, "h": 180 } }
+  },
+  "meta": { "image": "spritesheet.png" }
+}
