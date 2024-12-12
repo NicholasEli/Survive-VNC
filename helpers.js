@@ -1,6 +1,32 @@
 /**
+ * Renders an array of template paths
+ * @param { array } template_paths - array of template source paths
+ */
+export const get_templates = async function (template_paths) {
+	let index = 0;
+	const _render_template = async function () {
+		if (index >= template_paths.length) return;
+
+		const _get_template = function () {
+			return new Promise((resolve) => {
+				return htmx
+					.ajax('GET', template_paths[index], { target: 'main', swap: 'beforeend' })
+					.then(() => resolve());
+			});
+		};
+
+		await _get_template();
+
+		index++;
+		await _render_template();
+	};
+
+	await _render_template();
+};
+
+/**
  * Generate UUI
- * return { string } random string of characters and number
+ * @return { string } random string of characters and number
  */
 export const uuid = function () {
 	var S4 = function () {
@@ -10,6 +36,22 @@ export const uuid = function () {
 	return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
 };
 
+/**
+ * Determines if x and y are out of map bounds
+ */
+
+export const out_of_bounds = function (x, y) {
+	if (!Region) return;
+
+	const { width, height } = Region.config;
+	const x_limit = width / 2;
+	const y_limit = height / 2;
+
+	if (x < x_limit * -1 || x > x_limit) return true;
+	if (y < y_limit * -1 || y > y_limit) return true;
+
+	return false;
+};
 /**
  * Determines what degree point is heading depending on direction
  * 0/360 being right center of the viewport
@@ -29,9 +71,10 @@ export const degree = function (fromX, fromY, toX, toY) {
 };
 
 export const sprite_orientation = function (degrees) {
-	if (degrees >= 225 && degrees <= 315) return 'backward';
-	if (degrees >= 125 && degrees < 225) return 'left';
-	if (degrees > 315 || (degrees >= 0 && degrees <= 45)) return 'right';
+	if (degrees > 325) return 'right';
+	if (degrees > 215) return 'backward';
+	if (degrees > 125) return 'left';
+	if (degrees < 65) return 'right';
 
 	return 'forward';
 };

@@ -4,7 +4,7 @@
 }
 
 :root {
-	font-size: 18px;
+	font-size: 16px;
 
 	--blue-300: #3ca3b2;
 	--blue-700: #205c81;
@@ -37,6 +37,17 @@ body,
 main {
 	width: 100vw;
 	overflow-x: hidden;
+	cursor: url('../assets/cursor/cursor.png'), auto;
+}
+
+a,
+button {
+	cursor: url('../assets/cursor/pointer.png'), auto;
+}
+
+a:active,
+button:active {
+	cursor: url('../assets/cursor/pointer-down.png'), auto;
 }
 
 main {
@@ -48,12 +59,6 @@ main {
 	letter-spacing: 1px;
 	border: 2px solid var(--brown-700);
 	border-radius: 10px;
-}
-
-/** Classes **/
-.wrapper {
-	width: 100%;
-	padding: 1rem;
 }
 
 .hidden {

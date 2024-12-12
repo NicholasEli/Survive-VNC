@@ -1,6 +1,6 @@
 import TYPES from '../../types/index.js';
 import { uuid, is_container_locked } from '../helpers.js';
-import inventory from '../inventory.js';
+import inventory from '../modals/inventory.js';
 import toast from '../toast.js';
 
 const SANDBOX = () => ({

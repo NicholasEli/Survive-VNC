@@ -1,0 +1,19 @@
+<div class="modal inventory">
+	<div class="wrapper">
+		<div class="modal__title">
+			<h6 data-el="inventory-title">Inventory</h6>
+			<button class="modal__close" type="button" onclick="close_all_modals()"></button>
+		</div>
+		<div data-el="inventory-items" class="inventory__items"></div>
+		<div data-el="modal__actions inventory-actions" class="inventory__actions">
+			<div class="inventory-actions__item-title">
+				<p data-el="item-title"></p>
+			</div>
+			<button data-el="item-cancel" type="button" onclick="close_inventory_actions()"></button>
+			<button data-el="item-use" type="button" onclick="use_item()">Use</button>
+			<button data-el="item-craft" type="button" onclick="craft_item()">Craft</button>
+			<button data-el="item-drop" type="button" onclick="drop_item()">Drop</button>
+			<p>Dropping items destroys them permenantly</p>
+		</div>
+	</div>
+</div>

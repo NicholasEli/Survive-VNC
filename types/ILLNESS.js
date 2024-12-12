@@ -1,5 +1,6 @@
 const ILLNESS = {
-	HEALTHY: 'Healthy'
+	HEALTHY: 'HEALTHY',
+	SALMONELLA: 'SALMONELLA'
 };
 
 export default ILLNESS;

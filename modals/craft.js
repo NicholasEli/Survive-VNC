@@ -1,8 +1,8 @@
-import TYPES from './types/index.js';
-import Containers from './containers/index.js';
-import Items from './items/index.js';
-import toast from './toast.js';
-import events from './events.js';
+import TYPES from '../types/index.js';
+import Containers from '../containers/index.js';
+import Items from '../items/index.js';
+import toast from '../toast.js';
+import events from '../events.js';
 
 const craft = {
 	match: function () {
@@ -55,6 +55,10 @@ const craft = {
 
 		if (match.ITEM) {
 			//
+		}
+
+		if (match.ACTION) {
+			Player.actions(match.ACTION);
 		}
 
 		return match;

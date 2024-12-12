@@ -1,0 +1,43 @@
+.modal.letter {
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.letter form {
+	width: calc(100% - 4rem);
+	flex: 1;
+	margin-left: 1rem;
+}
+
+.letter textarea,
+.letter textarea:active {
+	width: 100%;
+	height: calc(100% - 1rem);
+	padding: 1rem;
+	font-family: var(--font-arcade);
+	font-size: 0.75rem;
+	color: var(--brown-700);
+	resize: none;
+	background-color: transparent;
+	background-image: url('../assets/modals/wrapper.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	outline: none;
+	border: none;
+}
+
+.letter textarea::placeholder {
+	font-family: var(--font-arcade);
+	font-size: 0.75rem;
+	color: var(--brown-700);
+}
+
+body.letter .overlay {
+	display: block;
+	pointer-events: all;
+}
+
+body.letter .letter {
+	display: flex;
+	pointer-events: all;
+}

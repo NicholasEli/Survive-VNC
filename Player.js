@@ -1,4 +1,5 @@
 import TYPES from './types/index.js';
+import toast from './toast.js';
 import { degree, sprite_orientation, distance } from './helpers.js';
 import Item from './items/index.js';
 
@@ -10,7 +11,11 @@ Player = {
 		{ ...Item(TYPES.ITEMS.AXE) },
 		{ ...Item(TYPES.ITEMS.SHOVEL) },
 		{ ...Item(TYPES.ITEMS.FIREWOOD) },
-		{ ...Item(TYPES.ITEMS.ROCK) }
+		{ ...Item(TYPES.ITEMS.ROCK) },
+		{ ...Item(TYPES.ITEMS.MEAT_RAW) },
+		{ ...Item(TYPES.ITEMS.BOTTLE) },
+		{ ...Item(TYPES.ITEMS.WATER) },
+		{ ...Item(TYPES.ITEMS.LETTER_BLANK) }
 	],
 	capacity: TYPES.PLAYER.CAPACITY,
 	backpack: null,
@@ -21,19 +26,15 @@ Player = {
 		hunger: 100,
 		thirst: 100
 	},
-	gender: TYPES.PLAYER.GENDERS.MALE,
+	gender: TYPES.PLAYER.GENDERS.FEMALE,
 	orientation: 'forward',
 	tween: null,
 	sprite: {
-		sheet: 'assets/player/sprite.png',
-		frames_walk_forward: 'assets/player/frames_walk_forward.json',
-		frames_walk_backward: 'assets/player/frames_walk_backward.json',
-		frames_walk_left: 'assets/player/frames_walk_left.json',
-		frames_walk_right: 'assets/player/frames_walk_right.json'
+		type: TYPES.CLOTHING.PLAIN
 	},
+	moving: false,
 	init: function () {
 		console.log('--Init Player--');
-
 		if (Region) {
 			this.x = Region.config.player.start.x;
 			this.y = Region.config.player.start.y;
@@ -43,82 +44,40 @@ Player = {
 	},
 	load: function (scene) {
 		scene.load.atlas(
-			'player_walk_forward',
-			`${this.sprite.sheet}?v=${Date.now()}`,
-			`${this.sprite.frames_walk_forward}?v=${Date.now()}`
-		);
-
-		scene.load.atlas(
-			'player_walk_backward',
-			`${this.sprite.sheet}?v=${Date.now()}`,
-			`${this.sprite.frames_walk_backward}?v=${Date.now()}`
-		);
-
-		scene.load.atlas(
-			'player_walk_left',
-			`${this.sprite.sheet}?v=${Date.now()}`,
-			`${this.sprite.frames_walk_left}?v=${Date.now()}`
-		);
-
-		scene.load.atlas(
-			'player_walk_right',
-			`${this.sprite.sheet}?v=${Date.now()}`,
-			`${this.sprite.frames_walk_right}?v=${Date.now()}`
+			this.sprite.type,
+			`assets/player/${this.gender}/${this.sprite.type}/sprite.png`,
+			`assets/player/${this.gender}/${this.sprite.type}/frames.json`
 		);
 
 		return scene;
 	},
 	create: function (scene) {
 		const player = scene.matter.add
-			.sprite(this.x, this.y, 'player_walk_' + this.orientation, 'frame_1')
+			.sprite(this.x, this.y, this.sprite.type, 'frame_1')
+			.setScale(0.58)
 			.setDepth(TYPES.ZINDEX.PLAYER);
 
-		scene.anims.create({
-			key: 'walk_forward',
-			frames: scene.anims.generateFrameNames('player_walk_forward', {
-				prefix: 'frame_',
-				start: 1,
-				end: 9,
-				zeroPad: 1
-			}),
-			frameRate: 10,
-			repeat: -1
-		});
+		const orientations = [
+			{ key: 'player_move_forward', start: 1, end: 9 },
+			{ key: 'player_move_backward', start: 11, end: 18 },
+			{ key: 'player_move_left', start: 19, end: 27 },
+			{ key: 'player_move_right', start: 28, end: 36 }
+		];
 
-		scene.anims.create({
-			key: 'walk_backward',
-			frames: scene.anims.generateFrameNames('player_walk_backward', {
-				prefix: 'frame_',
-				start: 1,
-				end: 9,
-				zeroPad: 1
-			}),
-			frameRate: 10,
-			repeat: -1
-		});
+		orientations.forEach((orientation) => {
+			const { key, start, end } = orientation;
 
-		scene.anims.create({
-			key: 'walk_left',
-			frames: scene.anims.generateFrameNames('player_walk_left', {
-				prefix: 'frame_',
-				start: 1,
-				end: 9,
-				zeroPad: 1
-			}),
-			frameRate: 10,
-			repeat: -1
-		});
-
-		scene.anims.create({
-			key: 'walk_right',
-			frames: scene.anims.generateFrameNames('player_walk_right', {
-				prefix: 'frame_',
-				start: 1,
-				end: 9,
-				zeroPad: 1
-			}),
-			frameRate: 10,
-			repeat: -1
+			scene.anims.create({
+				key,
+				frames: scene.anims.generateFrameNames(this.sprite.type, {
+					prefix: 'frame_',
+					start,
+					end,
+					zeroPad: 1
+				}),
+				frameRate: 10,
+				repeat: -1
+			});
 		});
 
 		player.id = 'player';
@@ -130,13 +89,16 @@ Player = {
 		return distance * 10;
 	},
 	move: function (scene, toX, toY) {
+		if (this.moving == true) return;
+
 		const _distance = distance(this.instance.x, this.instance.y, toX, toY);
 		const _degree = degree(this.instance.x, this.instance.y, toX, toY);
 		const orientation = sprite_orientation(_degree);
 		const speed = this.getSpeed(_distance);
 
+		this.moving = true;
 		this.orientation = orientation;
-		this.instance.play('walk_' + orientation);
+		this.instance.play('player_move_' + orientation);
 
 		this.tween = scene.tweens.add({
 			targets: this.instance,
@@ -144,15 +106,58 @@ Player = {
 			y: toY,
 			duration: speed,
 			onComplete: () => {
+				this.moving = false;
 				this.instance.stop('walk_' + orientation);
 			}
 		});
 	},
 	take: function (item) {
+		if (this.inventory.length + 1 > this.capacity) {
+			toast.danger(TYPES.TOAST.PLAYER.INVENTORY.FULL);
+			return;
+		}
 		this.inventory.push(item);
 	},
 	remove: function (item) {
 		this.inventory = this.inventory.filter((i) => i.id != item.id);
+	},
+	setAttribute: function (attribute, adjustment) {
+		if (!attribute || !adjustment) return;
+
+		if (attribute == TYPES.PLAYER.ATTRIBUTES.ILLNESS) {
+			this.attributes[attribute] = adjustment;
+			return;
+		}
+
+		this.attributes[attribute] = this.attributes[attribute] + adjustment;
+	},
+	actions: function (action) {
+		const is_cured = Math.round(Math.random());
+		const is_sick = Math.round(Math.random());
+
+		if (action == TYPES.ACTIONS.WASH_HANDS && is_cured) {
+			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.HEALTHY);
+			return;
+		}
+
+		if (action == TYPES.ILLNESS.SALMONELLA && is_sick) {
+			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.SALMONELLA);
+			return;
+		}
+	},
+	illness: function () {
+		if (this.attributes.illness == TYPES.ILLNESS.SALMONELLA) {
+			this.attributes.health = this.attributes.health - 3;
+		}
+	},
+	hunger: function () {
+		this.attributes.hunger = this.attributes.hunger - 1;
+	},
+	thirst: function () {
+		this.attributes.thirst = this.attributes.thirst - 2;
+	},
+	temperature: function () {
+		this.attributes.temperature = this.attributes.temperature - 1;
 	}
 };
 

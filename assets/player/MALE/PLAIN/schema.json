@@ -1,0 +1,59 @@
+{
+  "bodyTypeName": "male",
+  "url": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&legs=Pantaloons_red&clothes=Shortsleeve_white&jacket=Collared_coat_forest&hair=Bedhead_black&beard=none&headcover=none&hat=none&shoes=Shoes_black",
+  "spritesheets": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
+  "version": 1,
+  "datetime": "12/4/2024, 9:07:47 PM",
+  "credits": "Authors: bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike), Manuel Riecke (MrBeast), ElizaWy, Nila122, Johannes Sjölund (wulax)\n\n- body/bodies/male/light.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike). License(s): CC-BY-SA 3.0, GPL 3.0. see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - https://opengameart.org/content/lpc-male-jumping-animation-by-durrani\n    - https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle\n    - https://opengameart.org/content/lpc-revised-character-basics\n\n- head/heads/human/male/light.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original head by Redshrike; tweaks by BenCreating; modular version by bluecarrot16\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-character-bases\n\n- hair/bedhead/male/black.png: by Manuel Riecke (MrBeast). License(s): CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n\n- torso/clothes/shortsleeve/shortsleeve/male/white.png: by bluecarrot16, ElizaWy, Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original by ElizaWy walkcycle only; extended to all animations by adapting from longsleeve, edited to v3 bases by bluecarrot16\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - http://opengameart.org/content/lpc-revised-character-basics\n    - http://opengameart.org/content/lpc-clothing-updates\n\n- torso/jacket/collared/male/forest.png: by bluecarrot16. License(s): CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-gentleman\n    - https://opengameart.org/content/lpc-pirates\n\n- legs/pantaloons/male/red.png: by Nila122, Johannes Sjölund (wulax), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0,, GPL 2.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-pirates\n    - https://opengameart.org/content/more-lpc-clothes-and-hair\n\n- feet/shoes/male/black.png: by bluecarrot16, Johannes Sjölund (wulax). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - http://opengameart.org/content/lpc-clothing-updates",
+  "layers": [
+    {
+      "fileName": "body/bodies/male/light.png",
+      "zPos": 10,
+      "parentName": "body",
+      "name": "Body color",
+      "variant": "light"
+    },
+    {
+      "fileName": "feet/shoes/male/black.png",
+      "zPos": 15,
+      "parentName": "shoes",
+      "name": "Shoes",
+      "variant": "black"
+    },
+    {
+      "fileName": "legs/pantaloons/male/red.png",
+      "zPos": 20,
+      "parentName": "legs",
+      "name": "Pantaloons",
+      "variant": "red"
+    },
+    {
+      "fileName": "torso/clothes/shortsleeve/shortsleeve/male/white.png",
+      "zPos": 35,
+      "parentName": "clothes",
+      "name": "Shortsleeve",
+      "variant": "white"
+    },
+    {
+      "fileName": "torso/jacket/collared/male/forest.png",
+      "zPos": 55,
+      "parentName": "jacket",
+      "name": "Collared coat",
+      "variant": "forest"
+    },
+    {
+      "fileName": "head/heads/human/male/light.png",
+      "zPos": 100,
+      "parentName": "head",
+      "name": "Human male",
+      "variant": "light"
+    },
+    {
+      "fileName": "hair/bedhead/male/black.png",
+      "zPos": 120,
+      "parentName": "hair",
+      "name": "Bedhead",
+      "variant": "black"
+    }
+  ]
+}

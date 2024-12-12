@@ -10,134 +10,80 @@
 			type="text/css"
 			href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
 		/>
+		<!-- Base Level -->
 		<link rel="stylesheet" href="./styles/reset.css" />
 		<link rel="stylesheet" href="./styles/index.css" />
 		<link rel="stylesheet" href="./styles/modals.css" />
+		<link rel="stylesheet" href="./styles/button.css" />
+		<!-- Components -->
 		<link rel="stylesheet" href="./styles/hud.css" />
+		<link rel="stylesheet" href="./styles/modal-container.css" />
+		<link rel="stylesheet" href="./styles/modal-craft.css" />
+		<link rel="stylesheet" href="./styles/modal-inventory.css" />
+		<link rel="stylesheet" href="./styles/modal-letter.css" />
 
 		<script>
-			Game = null;
-			Region = null;
-			Player = null;
+			clear_inventory_actions = null;
+			close_all_modals = null;
+			close_inventory_actions = null;
 			Container = null;
-			Item = null;
 			Craft = [];
+			craft_item = null;
+			craft_items = null;
+			drop_item = null;
+			Game = null;
+			Item = null;
+			Letter = null;
+			Player = null;
+			Region = null;
+			return_item = null;
 			set_attributes = null;
+			use_item = null;
 			open_inventory = function () {
 				document.body.classList.add('inventory');
 			};
-			use_item = null;
-			drop_item = null;
-			return_item = null;
-			craft_item = null;
-			craft_items = null;
-			close_all_modals = null;
+			close_all_modals = function () {
+				document.body.classList.remove(
+					'container',
+					'craft',
+					'craft-actions',
+					'inventory',
+					'inventory-actions',
+					'letter',
+					'note'
+				);
+
+				if (Craft && Craft.length) {
+					Craft.forEach((item) => {
+						Player.inventory.push(item);
+					});
+				}
+
+				if (Container) Container.toggle();
+				Container = null;
+				Item = null;
+				Craft = [];
+			};
 		</script>
 
+		<script
+			src="https://unpkg.com/htmx.org@1.9.12"
+			integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/client-side-templates.js"></script>
 		<script src="./phaser.min.js"></script>
+		<!--
 		<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+		-->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 		<script type="module" src="./index.js"></script>
 	</head>
 	<body>
-		<main>
-			<!-- Hud -->
-
-			<header>
-				<div class="player__attributes">
-					<div class="player__attribute player__attribute-health">
-						<box-icon name="plus-medical" type="solid" color="#fff" size="cssSize"></box-icon>
-						<div data-attribute="health">
-							<span></span>
-							<div></div>
-						</div>
-					</div>
-					<div class="player__attribute player__attribute-thirst">
-						<box-icon name="droplet-half" type="solid" color="#fff" size="cssSize"></box-icon>
-						<div data-attribute="thirst">
-							<span></span>
-							<div></div>
-						</div>
-					</div>
-					<div class="player__attribute player__attribute-hunger">
-						<box-icon type="solid" color="#fff" size="cssSize" name="cookie"></box-icon>
-						<div data-attribute="hunger">
-							<span></span>
-							<div></div>
-						</div>
-					</div>
-				</div>
-				<div class="player__attributes">
-					<div
-						class="player__attribute player__attribute-temperature hidden"
-						data-attribute="temperature"
-					>
-						<box-icon name="wind" mtype="solid" color="#fff" size="cssSize"></box-icon>
-					</div>
-					<div class="player__attribute player__attribute-illness hidden" data-attribute="illness">
-						<box-icon type="solid" color="#fff" size="cssSize" name="virus"></box-icon>
-					</div>
-				</div>
-				<div class="player__actions">
-					<button type="button" onclick="open_inventory()">
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M15 21V12H9V21M15 16H9M15 9H9M15 6.03838V6C15 5.06812 15 4.60218 14.8478 4.23463C14.6448 3.74458 14.2554 3.35523 13.7654 3.15224C13.3978 3 12.9319 3 12 3C11.0681 3 10.6022 3 10.2346 3.15224C9.74458 3.35523 9.35523 3.74458 9.15224 4.23463C9 4.60218 9 5.06812 9 6V6.03838M15 6.03838C14.3714 6 13.5965 6 12.6 6H11.4C10.4035 6 9.62856 6 9 6.03838M15 6.03838C15.7844 6.08627 16.3409 6.19394 16.816 6.43597C17.5686 6.81947 18.1805 7.43139 18.564 8.18404C19 9.03969 19 10.1598 19 12.4V17.8C19 18.9201 19 19.4802 18.782 19.908C18.5903 20.2843 18.2843 20.5903 17.908 20.782C17.4802 21 16.9201 21 15.8 21H8.2C7.07989 21 6.51984 21 6.09202 20.782C5.71569 20.5903 5.40973 20.2843 5.21799 19.908C5 19.4802 5 18.9201 5 17.8V12.4C5 10.1598 5 9.03969 5.43597 8.18404C5.81947 7.43139 6.43139 6.81947 7.18404 6.43597C7.65905 6.19394 8.21558 6.08627 9 6.03838"
-							/>
-						</svg>
-					</button>
-				</div>
-			</header>
-
-			<section id="canvas"></section>
-
-			<!-- Overlay -->
-			<div class="overlay"></div>
-
-			<!-- Container Model -->
-			<div class="modal container">
-				<div class="wrapper">
-					<div class="modal__title">
-						<h6 data-el="container-title">Container</h6>
-						<button class="modal__close" type="button" onclick="close_all_modals()">[CLOSE]</button>
-					</div>
-					<div data-el="container-items" class="container__items"></div>
-				</div>
-			</div>
-
-			<!-- Inventory Modal -->
-			<div class="modal inventory">
-				<div class="wrapper">
-					<div class="modal__title">
-						<h6 data-el="inventory-title">Inventory</h6>
-						<button class="modal__close" type="button" onclick="close_all_modals()">[CLOSE]</button>
-					</div>
-					<div data-el="inventory-items" class="inventory__items"></div>
-					<div data-el="modal__actions inventory-actions" class="inventory__actions">
-						<button data-el="item-use" type="button" onclick="use_item()">Use</button>
-						<button data-el="item-craft" type="button" onclick="craft_item()">Craft</button>
-						<button data-el="item-drop" type="button" onclick="drop_item()">Drop</button>
-						<p>Dropping items destroys them permenantly</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Crafting Modal -->
-			<div class="modal craft">
-				<div class="wrapper">
-					<div class="modal__title">
-						<h6 class="craft-title">Craft</h6>
-					</div>
-					<div data-el="craft-items" class="craft__items"></div>
-					<div data-el="craft-actions" class="modal__actions craft__actions">
-						<p data-el="craftable"></p>
-						<button data-el="item-craft" type="button" onclick="craft_items()">Craft Items</button>
-					</div>
-				</div>
-			</div>
-		</main>
+		<main></main>
 
 		<script src="./hud.js" type="module"></script>
-		<script src="./inventory.js" type="module"></script>
+		<script src="./modals/inventory.js" type="module"></script>
+		<script src="./modals/letter.js" type="module"></script>
 	</body>
 </html>

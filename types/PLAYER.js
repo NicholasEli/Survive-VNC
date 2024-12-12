@@ -1,4 +1,11 @@
 const PLAYER = {
+	ATTRIBUTES: {
+		HEALTH: 'health',
+		TEMPERATURE: 'temperature',
+		ILLNESS: 'illness',
+		HUNGER: 'hunger',
+		THIRST: 'thirst'
+	},
 	GENDERS: {
 		MALE: 'MALE',
 		FEMALE: 'FEMALE'

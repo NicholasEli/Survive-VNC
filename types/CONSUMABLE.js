@@ -1,3 +1,7 @@
+/**
+ * Consumable items are destroyed upon crafting items together
+ */
+
 const CONSUMABLE = {
 	ASH: true,
 	AXE: false,
@@ -6,7 +10,8 @@ const CONSUMABLE = {
 	MEAT_COOKED: true,
 	MEAT_RAW: true,
 	ROCK: false,
-	SHOVEL: false
+	SHOVEL: false,
+	WATER: true
 };
 
 export default CONSUMABLE;

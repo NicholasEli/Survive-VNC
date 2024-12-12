@@ -1,0 +1,94 @@
+.modal.craft {
+	top: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.craft__items {
+	width: calc(100% - 4rem);
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	gap: 0.5rem;
+	margin-left: 1rem;
+	padding: 0.5rem;
+	background-image: url('../assets/modals/wrapper.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	overflow: auto;
+}
+
+.craft__item {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+	padding: 0.5rem;
+	cursor: pointer;
+	background-image: url('../assets/modals/item.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	cursor: url('../assets/cursor/pointer.png'), auto;
+}
+
+.craft__item img {
+	width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+.craft__item span {
+	width: 0.5rem;
+	height: 0.5rem;
+	position: absolute;
+	top: 0.25rem;
+	right: 0.25rem;
+	z-index: 2;
+	background-image: url('../assets/modals/item-close.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.craft__match {
+	width: 8rem;
+	margin-left: 1rem;
+	padding: 0.5rem 0.5rem 1rem 0.5rem;
+	background-image: url('../assets/modals/craft-dialog.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.craft__match span {
+	font-family: var(--font-arcade);
+	font-size: 0.75rem;
+	color: var(--brown-700);
+}
+
+.craft__actions {
+	display: none;
+	flex-wrap: wrap;
+	padding-left: 1rem;
+}
+
+.craft__actions p {
+	font-family: var(--font-arcade);
+	font-size: 1rem;
+	color: var(--brown-700);
+}
+
+.craft__items:empty,
+.craft__items:empty + .craft__match {
+	display: none;
+}
+
+body.craft .overlay {
+	display: block;
+	pointer-events: all;
+}
+
+body.craft .craft {
+	display: flex;
+	pointer-events: all;
+}
+
+body.craft-actions .craft__actions {
+	display: flex;
+}

@@ -1,9 +1,9 @@
 {
   "frames": {
-    "frame_1": { "frame": { "x": 52, "y": 0, "w": 40, "h": 50 } },
-    "frame_2": { "frame": { "x": 52, "y": 50, "w": 40, "h": 50 } },
-    "frame_3": { "frame": { "x": 52, "y": 100, "w": 40, "h": 50 } },
-    "frame_4": { "frame": { "x": 52, "y": 150, "w": 40, "h": 50 } }
+    "frame_1": { "frame": { "x": 0, "y": 0, "w": 16, "h": 16 } },
+    "frame_2": { "frame": { "x": 16, "y": 0, "w": 16, "h": 16 } },
+    "frame_3": { "frame": { "x": 32, "y": 0, "w": 16, "h": 16 } },
+    "frame_4": { "frame": { "x": 48, "y": 0, "w": 16, "h": 16 } }
   },
   "meta": { "image": "spritesheet.png" }
 }

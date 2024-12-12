@@ -1,0 +1,163 @@
+.modal.inventory {
+	top: calc(50% - 1rem);
+	transform: translate(-50%, -100%);
+}
+
+.inventory__items {
+	width: calc(100% - 4rem);
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	flex: 1;
+	gap: 0.5rem;
+	margin-left: 1rem;
+	padding: 0.5rem;
+	background-image: url('../assets/modals/wrapper.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	overflow: auto;
+}
+
+.inventory__items::-webkit-scrollbar {
+	width: 1rem;
+}
+
+.inventory__items::-webkit-scrollbar-track {
+	background-image: url('../assets/modals/scroll-bar.png');
+}
+
+.inventory__items::-webkit-scrollbar-thumb {
+	background-image: url('../assets/modals/scroll-thumb.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.inventory__item {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+	padding: 0.5rem;
+	cursor: pointer;
+	background-image: url('../assets/modals/item.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	cursor: url('../assets/cursor/pointer.png'), auto;
+}
+
+.inventory__item:active {
+	cursor: url('../assets/cursor/pointer-down.png'), auto;
+	transform: scale(0.9);
+}
+
+.inventory__item img {
+	width: 100%;
+}
+
+.inventory__item.active {
+	border: 2px solid var(--purple-700);
+}
+
+.inventory__actions {
+	width: calc(100% - 2rem);
+	max-width: 20rem;
+	min-height: 8rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	display: none;
+	align-content: flex-end;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	padding: 2rem;
+	background-image: url('../assets/modals/item-options.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.inventory__actions [data-el='item-cancel'] {
+	width: 1rem;
+	height: 1rem;
+	position: absolute;
+	top: 1.5rem;
+	right: 1.5rem;
+	background-image: url('../assets/modals/item-close.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border: none;
+}
+
+.inventory-actions__item-title {
+	width: 8rem;
+	height: 2rem;
+	position: absolute;
+	top: 0.5rem;
+	left: 2rem;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	background-image: url('../assets/modals/item-title.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+[data-el='item-drop'],
+[data-el='item-use'],
+[data-el='item-craft'] {
+	padding: 0.25rem 1rem;
+	border-radius: 10px;
+	border: 2px solid var(--brown-700);
+	color: #fff;
+	font-family: var(--font-arcade);
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+[data-el='item-drop'] {
+	background-color: var(--red-700);
+}
+
+[data-el='item-use'] {
+	display: none;
+	background-color: var(--green-800);
+}
+
+body.action-use-item [data-el='item-use'] {
+	display: block;
+}
+
+[data-el='item-craft'] {
+	background-color: var(--blue-700);
+}
+
+.inventory__actions p {
+	width: 100%;
+	font-family: var(--font-arcade);
+	font-size: 1rem;
+	color: var(--brown-700);
+}
+
+.inventory-actions__item-title p {
+	max-width: calc(100% - 1rem);
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 1rem;
+}
+
+body.inventory .overlay {
+	display: block;
+	pointer-events: all;
+}
+
+body.inventory .inventory {
+	display: flex;
+	pointer-events: all;
+}
+
+body.inventory-actions .inventory__actions {
+	display: flex;
+}

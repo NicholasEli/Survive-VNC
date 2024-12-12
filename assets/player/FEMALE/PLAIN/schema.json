@@ -1,0 +1,52 @@
+{
+  "bodyTypeName": "female",
+  "url": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&legs=Pants_blue&clothes=Longsleeve_purple&jacket=none&hair=Pigtails_bangs_ash&beard=none&headcover=none&hat=none&shoes=Boots_black&sex=female",
+  "spritesheets": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
+  "version": 1,
+  "datetime": "12/4/2024, 10:26:03 PM",
+  "credits": "Authors: Benjamin K. Smith (BenCreating), bluecarrot16, TheraHedwig, Evert, MuffinElZangano, Durrani, Pierre Vigier (pvigier), ElizaWy, Matthew Krohn (makrohn), Johannes Sjölund (wulax), Stephen Challener (Redshrike), Emilio J. Sanchez-Sierra, JaidynReiman, Joe White, Nila122\n\n- body/bodies/female/light.png: by Benjamin K. Smith (BenCreating), bluecarrot16, TheraHedwig, Evert, MuffinElZangano, Durrani, Pierre Vigier (pvigier), ElizaWy, Matthew Krohn (makrohn), Johannes Sjölund (wulax), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. see details at https://opengameart.org/content/lpc-character-bases\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - https://opengameart.org/content/lpc-ladies\n    - https://opengameart.org/content/lpc-7-womens-shirts\n    - https://opengameart.org/content/lpc-jump-expanded\n\n- head/heads/human/male/light.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original head by Redshrike; tweaks by BenCreating; modular version by bluecarrot16\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-character-bases\n\n- hair/pigtails_bangs/female/ash.png: by Emilio J. Sanchez-Sierra, bluecarrot16. License(s): CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/steampun-a-fy-with-concept-art\n    - https://opengameart.org/content/lpc-hair\n\n- torso/clothes/longsleeve/longsleeve/female/purple.png: by bluecarrot16, ElizaWy, Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original by ElizaWy, edited to v3 bases by bluecarrot16\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-7-womens-shirts\n    - http://opengameart.org/content/lpc-clothing-updates\n\n- legs/pants/female/blue.png: by bluecarrot16, JaidynReiman, Joe White, Matthew Krohn (makrohn), Johannes Sjölund (wulax). License(s): GPL 3.0, CC-BY-SA 3.0. \n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - http://opengameart.org/content/lpc-clothing-updates\n\n- feet/boots/female/black.png: by bluecarrot16, Nila122. License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-clothes-and-hair",
+  "layers": [
+    {
+      "fileName": "body/bodies/female/light.png",
+      "zPos": 10,
+      "parentName": "body",
+      "name": "Body color",
+      "variant": "light"
+    },
+    {
+      "fileName": "legs/pants/female/blue.png",
+      "zPos": 20,
+      "parentName": "legs",
+      "name": "Pants",
+      "variant": "blue"
+    },
+    {
+      "fileName": "feet/boots/female/black.png",
+      "zPos": 25,
+      "parentName": "shoes",
+      "name": "Boots",
+      "variant": "black"
+    },
+    {
+      "fileName": "torso/clothes/longsleeve/longsleeve/female/purple.png",
+      "zPos": 35,
+      "parentName": "clothes",
+      "name": "Longsleeve",
+      "variant": "purple"
+    },
+    {
+      "fileName": "head/heads/human/male/light.png",
+      "zPos": 100,
+      "parentName": "head",
+      "name": "Human male",
+      "variant": "light"
+    },
+    {
+      "fileName": "hair/pigtails_bangs/female/ash.png",
+      "zPos": 120,
+      "parentName": "hair",
+      "name": "Pigtails bangs",
+      "variant": "ash"
+    }
+  ]
+}

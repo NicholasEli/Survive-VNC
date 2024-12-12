@@ -2,9 +2,14 @@ import Region from './Region.js';
 import Player from './Player.js';
 import EsterShortPark from './regions/ester-short-park/index.js';
 import events from './events.js';
+import { async_timeout, get_templates } from './helpers.js';
+import TYPES from './types/index.js';
 
 window.onload = async function () {
 	console.log('--Init Engine--');
+
+	const template_paths = Object.keys(TYPES.TEMPLATES).map((template) => TYPES.TEMPLATES[template]);
+	const templates = await get_templates(template_paths);
 
 	const canvas = document.getElementById('canvas');
 	const region = Region.init(EsterShortPark);
@@ -15,6 +20,16 @@ window.onload = async function () {
 
 	const resize = function (scene) {
 		scene.scale.resize(window.innerWidth, window.innerHeight);
+	};
+
+	const lifecycle = async function () {
+		if (!Player) return;
+		await async_timeout(10000);
+
+		Player.illness();
+		Player.hunger();
+		set_attributes();
+		lifecycle();
 	};
 
 	Game = new Phaser.Game({
@@ -42,11 +57,14 @@ window.onload = async function () {
 				});
 
 				this.cameras.main.startFollow(player.instance);
+				this.cameras.main.setZoom(2.5);
 
 				events.click(this, this.input);
 
 				window.addEventListener('resize', () => resize(this));
 				set_attributes();
+
+				lifecycle();
 			},
 			update: function () {}
 		},

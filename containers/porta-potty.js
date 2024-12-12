@@ -1,6 +1,6 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../inventory.js';
+import inventory from '../modals/inventory.js';
 
 const PORTA_POTTY = () => ({
 	id: null,
@@ -26,8 +26,12 @@ const PORTA_POTTY = () => ({
 
 		return scene;
 	},
-	create: function (scene) {
+	create: async function (scene) {
 		if (!scene) return null;
+
+		let req = await fetch('../assets/containers/porta_potty_frames.json');
+		req = await req.json();
+		const num_frames = Object.keys(req.frames).length;
 
 		const container = scene.matter.add
 			.sprite(this.x, this.y, 'porta_potty', 'frame_1', {
@@ -40,7 +44,7 @@ const PORTA_POTTY = () => ({
 			frames: scene.anims.generateFrameNames('porta_potty', {
 				prefix: 'frame_',
 				start: 1,
-				end: 4,
+				end: num_frames,
 				zeroPad: 1
 			}),
 			frameRate: 10,
@@ -51,7 +55,7 @@ const PORTA_POTTY = () => ({
 			key: 'porta-potty-close',
 			frames: scene.anims.generateFrameNames('porta_potty', {
 				prefix: 'frame_',
-				start: 4,
+				start: num_frames,
 				end: 1,
 				zeroPad: 1
 			}),
@@ -80,11 +84,11 @@ const PORTA_POTTY = () => ({
 			return false;
 		}
 
+		this.active = true;
 		Container = this;
 		inventory();
 
-		this.instance.setFrame('frame_2');
-		this.active = true;
+		this.instance.play('porta-potty-open');
 		this.instance.play('porta-potty-open').on('animationcomplete', () => {
 			if (this.active) {
 				document.body.classList.add('container');

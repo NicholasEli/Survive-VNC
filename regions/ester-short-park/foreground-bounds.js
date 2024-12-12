@@ -1,257 +1,298 @@
-const foreground_bounds = [
-	// Center/Stage
+const buildings = [
 	{
-		x: 10,
-		y: -10,
-		width: 200,
-		height: 10,
-		name: 'stage stairs'
-	},
-	// Top Center Path
-	{
+		width: 115,
+		height: 30,
 		x: 0,
-		y: -460,
-		width: 100,
-		height: 400,
-		name: 'top center path plans'
-	},
-	// Top Left Field
-	{
-		x: -100,
-		y: 140,
-		width: 50,
-		height: 25,
-		name: 'stage tree left'
+		y: -120
 	},
 	{
-		x: 100,
-		y: 140,
-		width: 50,
-		height: 25,
-		name: 'stage tree left'
-	},
-	{
-		x: -540,
-		y: -820,
-		width: 50,
-		height: 25,
-		name: 'field top left - top left tree'
-	},
-	{
-		x: -240,
-		y: -820,
-		width: 50,
-		height: 25,
-		name: 'field top left - top right tree'
-	},
-	{
-		x: -150,
-		y: -300,
-		width: 50,
-		height: 25,
-		name: 'field top left - bottom right tree'
-	},
-	{
-		x: -345,
-		y: -820,
-		width: 30,
-		height: 25,
-		name: 'field top left - stump'
-	},
-	// Top Right Field
-	{
-		x: 370,
-		y: -810,
-		width: 50,
-		height: 25,
-		name: 'field top right - top left tree'
-	},
-	{
-		x: 670,
-		y: -840,
-		width: 50,
-		height: 25,
-		name: 'field top right - top right tree'
-	},
-	{
-		x: 530,
-		y: -770,
-		width: 50,
-		height: 25,
-		name: 'field top right - center tree'
-	},
-	{
-		x: 390,
-		y: -670,
-		width: 50,
-		height: 25,
-		name: 'field top right - bottom left tree'
-	},
-	{
-		x: 265,
-		y: -730,
-		width: 30,
-		height: 25,
-		name: 'field top right - stump'
-	},
-	// Left Center Field
-	{
-		x: -815,
-		y: -450,
-		width: 50,
-		height: 25,
-		name: 'left center - tree'
-	},
-	{
-		x: -730,
-		y: -190,
-		width: 145,
-		height: 50,
-		name: 'left center - teetter totter'
-	},
-	//Bottom Left Field
-	{
-		x: -705,
-		y: 185,
-		width: 80,
-		height: 50,
-		name: 'bottom left - top left planter'
-	},
-	{
-		x: -525,
-		y: 185,
-		width: 80,
-		height: 50,
-		name: 'bottom left - top right planter'
-	},
-	{
-		x: -525,
-		y: 285,
-		width: 80,
-		height: 50,
-		name: 'bottom left - bottom right planter'
-	},
-	{
-		x: -705,
-		y: 285,
-		width: 80,
-		height: 50,
-		name: 'bottom left - bottom left planter'
-	},
-	{
-		x: -650,
-		y: 525,
-		width: 200,
-		height: 225,
-		name: 'bottom left - slocum house'
-	},
-	{
-		x: -520,
-		y: 565,
-		width: 60,
-		height: 135,
-		name: 'bottom left - slocum house attachment'
-	},
-	{
-		x: -415,
-		y: 820,
-		width: 50,
-		height: 25,
-		name: 'bottom left - tree'
-	},
-	{
-		x: -180,
-		y: 730,
-		width: 150,
-		height: 130,
-		name: 'bottom left - electric hosue'
-	},
-	// Bottom Right
-	{
-		x: 120,
-		y: 280,
-		width: 140,
-		height: 45,
-		name: 'bottom right - top bench'
-	},
-	{
-		x: 120,
-		y: 550,
-		width: 140,
-		height: 45,
-		name: 'bottom right - center bench'
-	},
-	{
-		x: 120,
-		y: 780,
-		width: 140,
-		height: 45,
-		name: 'bottom right - bottom bench'
-	},
-	{
-		x: 790,
-		y: 760,
-		width: 140,
-		height: 20,
-		name: 'bottom right - bottom right planter'
-	},
-	{
-		x: 480,
-		y: 770,
-		width: 130,
-		height: 45,
-		name: 'bottom right - clock tower'
-	},
-	{
-		x: 720,
-		y: 480,
-		width: 130,
-		height: 140,
-		name: 'bottom right - water bottom'
-	},
-	{
-		x: 780,
-		y: 450,
-		width: 110,
-		height: 200,
-		name: 'bottom right - water center'
-	},
-	{
-		x: 850,
-		y: 450,
 		width: 40,
-		height: 150,
-		name: 'bottom right - water center'
+		height: 32,
+		x: 240,
+		y: 304
 	},
 	{
-		x: 660,
-		y: 270,
-		width: 140,
-		height: 20,
-		name: 'bottom right - top right bench'
+		width: 52,
+		height: 36,
+		x: -80,
+		y: 320
 	},
-	// Center Right
+	// Main Building
 	{
-		x: 740,
-		y: -525,
-		width: 50,
-		height: 25,
-		name: 'bottom right - bottom tree'
+		width: 120,
+		height: 80,
+		x: -256,
+		y: 240
 	},
 	{
-		x: 820,
-		y: -670,
-		width: 50,
-		height: 25,
-		name: 'bottom right - bottom tree'
+		width: 16,
+		height: 32,
+		x: -312,
+		y: 312
 	},
 	{
-		x: 810,
-		y: -475,
-		width: 30,
-		height: 25,
-		name: 'bottom right - stump'
+		width: 64,
+		height: 16,
+		x: -224,
+		y: 320
+	},
+	{
+		width: 16,
+		height: 32,
+		x: -200,
+		y: 312
 	}
 ];
 
+const trees = [
+	// Big Trees
+	{
+		width: 4,
+		height: 4,
+		x: -140,
+		y: -16
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -268,
+		y: -160
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -172,
+		y: 336
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -124,
+		y: -320
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -284,
+		y: -320
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 116,
+		y: 32
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -124,
+		y: -320
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 100,
+		y: -336
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 276,
+		y: -336
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 324,
+		y: -208
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 260,
+		y: -128
+	},
+	// Small Trees
+	{
+		width: 24,
+		height: 4,
+		x: -240,
+		y: -275
+	},
+	{
+		width: 24,
+		height: 4,
+		x: -175,
+		y: -260
+	},
+	{
+		width: 24,
+		height: 4,
+		x: -65,
+		y: 30
+	},
+	{
+		width: 24,
+		height: 4,
+		x: 48,
+		y: 110
+	},
+	{
+		width: 24,
+		height: 4,
+		x: 208,
+		y: -320
+	},
+	{
+		width: 24,
+		height: 4,
+		x: 208,
+		y: -320
+	},
+	{
+		width: 24,
+		height: 4,
+		x: 160,
+		y: -272
+	},
+	{
+		width: 24,
+		height: 4,
+		x: 336,
+		y: -112
+	},
+	// Planter
+	{
+		width: 64,
+		height: 4,
+		x: 200,
+		y: 140
+	},
+	{
+		width: 64,
+		height: 4,
+		x: 88,
+		y: 256
+	},
+	{
+		width: 64,
+		height: 4,
+		x: 88,
+		y: 336
+	},
+	{
+		width: 16,
+		height: 4,
+		x: 352,
+		y: 336
+	}
+];
+
+const objects = [
+	// Long Bench
+	{
+		width: 32,
+		height: 4,
+		x: 200,
+		y: 180
+	},
+	// Short Bench
+	{
+		width: 8,
+		height: 16,
+		x: 132,
+		y: 328
+	},
+	{
+		width: 8,
+		height: 16,
+		x: 132,
+		y: 248
+	},
+	{
+		width: 8,
+		height: 16,
+		x: 328,
+		y: 328
+	},
+	// Swing Set
+	{
+		width: 60,
+		height: 12,
+		x: -280,
+		y: -76
+	},
+	// Lamp Posts
+	{
+		width: 4,
+		height: 4,
+		x: -232,
+		y: 16
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -56,
+		y: -208
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 56,
+		y: -208
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 264,
+		y: -48
+	},
+	{
+		width: 4,
+		height: 4,
+		x: 56,
+		y: 192
+	},
+	{
+		width: 4,
+		height: 4,
+		x: -40,
+		y: 192
+	},
+	// Statue
+	{
+		width: 4,
+		height: 4,
+		x: 0,
+		y: -320
+	},
+	// Bush
+	{
+		width: 16,
+		height: 4,
+		x: 0,
+		y: -220
+	},
+	{
+		width: 16,
+		height: 4,
+		x: 0,
+		y: -252
+	},
+	{
+		width: 16,
+		height: 4,
+		x: 0,
+		y: -284
+	},
+	// Water Feature
+	{
+		width: 32,
+		height: 96,
+		x: 344,
+		y: 128
+	}
+];
+
+const foreground_bounds = [...trees, ...buildings, ...objects];
 export default foreground_bounds;

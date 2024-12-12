@@ -1,20 +1,27 @@
-import TYPES from './types/index.js';
-import toast from './toast.js';
-import craft from './craft.js';
+import TYPES from '../types/index.js';
+import toast from '../toast.js';
+import craft from '../modals/craft.js';
 
 const container_ui = function () {
 	if (!Container) return;
 
 	const title = document.querySelector('[data-el="container-title"]');
 	let title_text = Container.name.replace(/_/g, ' ');
-	title_text = title_text + ` (${Container.inventory.length} / ${Container.capacity})`;
+
+	if (Container.capacity >= 9999) {
+		title_text = title_text + ` (${Container.capacity} / ${Container.capacity})`;
+	} else {
+		title_text = title_text + ` (${Container.inventory.length} / ${Container.capacity})`;
+	}
+
 	title.innerText = title_text;
 
 	const wrapper = document.querySelector('[data-el="container-items"]');
 	wrapper.innerHTML = '';
 
 	Container.inventory.forEach((item) => {
-		const btn = document.createElement('btn');
+		if (!item) return;
+		const btn = document.createElement('button');
 		const image = document.createElement('img');
 		const take_span = document.createElement('span');
 
@@ -23,9 +30,6 @@ const container_ui = function () {
 		btn.setAttribute('data-container-item', item.id);
 		if (!TYPES.CONSUMABLE[item.type]) btn.setAttribute('data-item-cnd', 'CND: ' + item.condition);
 
-		take_span.innerText = 'Take';
-		take_span.classList.add('take');
-
 		image.src = TYPES.SOURCE[item.type];
 
 		btn.append(image);
@@ -33,67 +37,60 @@ const container_ui = function () {
 		wrapper.appendChild(btn);
 
 		btn.addEventListener('click', () => {
-			if (btn.className.indexOf('take') == -1) {
-				btn.classList.toggle('take');
+			if (Player.inventory.length + 1 > Player.capacity) {
+				toast.danger(TYPES.TOAST.PLAYER.INVENTORY.FULL);
 				return;
 			}
 
-			if (btn.className.indexOf('take') > -1) {
-				if (Container.inventory.length + 1 > Container.capacity) return;
+			Container.remove(item);
+			Player.take(item);
 
-				Container.remove(item);
-				Player.take(item);
-				container_ui();
-				inventory_ui();
+			if (Container.illness) Player.actions(Container.illness);
 
-				if (Container.inventory.length <= 0 && Container.consumable && Container.instance.body) {
-					Container.instance.scene.matter.world.remove(Container.instance.body);
-					Container.instance.destroy();
-				}
+			container_ui();
+			inventory_ui();
+			set_attributes();
+
+			if (Container.inventory.length <= 0 && Container.consumable && Container.instance.body) {
+				Container.instance.scene.matter.world.remove(Container.instance.body);
+				Container.instance.destroy();
 			}
 		});
 	});
 };
 
+close_inventory_actions = function () {
+	const btns = document.querySelectorAll('[data-inventory-item]');
+
+	Item = null;
+	btns.forEach((btn) => btn.classList.remove('active'));
+	clear_inventory_actions();
+};
+
 const inventory_ui = function () {
+	const item_title = document.querySelector('[data-el="item-title"]');
 	const title = document.querySelector('[data-el="inventory-title"]');
 	let title_text = 'Inventory';
+	const capacity = Player.inventory.length;
 
-	let capacity = Player.inventory.length;
-	let max_capacity = Player.capacity;
-	if (Player.backpack) {
-		capacity = capacity + Player.backpack.inventory.length;
-		max_capacity = max_capacity + Player.backpack.capacity;
-	}
-
-	title_text += ` (${capacity} / ${max_capacity})`;
+	title_text += ` (${capacity} / ${Player.capacity})`;
 	title.innerText = title_text;
 
 	const wrapper = document.querySelector('[data-el="inventory-items"]');
 	wrapper.innerHTML = '';
 
 	Player.inventory.forEach((item) => {
-		const btn = document.createElement('btn');
+		if (!item) return;
+		const btn = document.createElement('button');
 		const image = document.createElement('img');
-		const drop_span = document.createElement('span');
-		const place_span = document.createElement('span');
 
 		btn.classList.add('inventory__item');
 		btn.title = item.type.replace(/_/g, ' ');
 		btn.setAttribute('data-inventory-item', item.id);
-		//if (!item.consumable) btn.setAttribute('data-item-cnd', 'CND: ' + item.condition);
-
-		drop_span.innerText = 'Drop';
-		drop_span.classList.add('drop');
-
-		place_span.innerText = 'Place';
-		place_span.classList.add('place');
 
 		image.src = TYPES.SOURCE[item.type];
 
 		btn.append(image);
-		btn.append(drop_span);
-		btn.append(place_span);
 		wrapper.appendChild(btn);
 
 		btn.addEventListener('click', () => {
@@ -101,16 +98,10 @@ const inventory_ui = function () {
 				.querySelectorAll('[data-inventory-item]')
 				.forEach((b) => b.classList.remove('active'));
 
+			item_title.innerText = item.type;
 			btn.classList.add('active');
 
-			if (Container && btn.className.indexOf('place') == -1) {
-				btn.classList.toggle('place');
-				return;
-			}
-
-			if (Container && btn.className.indexOf('place') > -1) {
-				if (capacity + 1 > max_capacity) return;
-
+			if (Container) {
 				Container.take(item);
 				Player.remove(item);
 				container_ui();
@@ -118,9 +109,16 @@ const inventory_ui = function () {
 				return;
 			}
 
-			if (!Container && !Item) {
+			clear_inventory_actions();
+
+			if ((!Container && !Item) || (!Container && Item)) {
 				Item = item;
-				document.body.classList.add('inventory-actions');
+				if (item.use) {
+					document.body.classList.add('inventory-actions', 'action-use-item');
+				} else {
+					document.body.classList.add('inventory-actions');
+				}
+
 				return;
 			}
 		});
@@ -140,18 +138,17 @@ const craft_ui = function () {
 	const match = craft.match();
 	const craftable = document.querySelector('[data-el="craftable"]');
 
-	if (match) {
-		craftable.innerText = match.CONTAINER;
-	} else {
-		craftable.innerText = '';
+	if (match && match.CONTAINER) craftable.innerText = match.CONTAINER;
+	if (match && match.ACTION) craftable.innerText = match.ACTION;
+
+	if (!match) {
+		craftable.innerText = 'None';
 	}
 
 	Craft.forEach((item) => {
-		const btn = document.createElement('btn');
+		const btn = document.createElement('button');
 		const image = document.createElement('img');
 		const span = document.createElement('span');
-
-		span.innerText = 'X';
 
 		btn.classList.add('craft__item');
 		btn.title = item.type.replace(/_/g, ' ');
@@ -177,6 +174,11 @@ use_item = function () {
 		toast.danger(TYPES.TOAST.ITEM.UNUSABLE);
 		return;
 	}
+
+	Item.use();
+	inventory_ui();
+	clear_inventory_actions();
+	set_attributes();
 };
 
 drop_item = function () {
@@ -184,7 +186,7 @@ drop_item = function () {
 
 	Player.inventory = Player.inventory.filter((item) => item.id !== Item.id);
 	inventory_ui();
-	document.body.classList.remove('inventory-actions');
+	clear_inventory_actions();
 };
 
 return_item = function () {
@@ -206,7 +208,7 @@ craft_item = function () {
 	Item = null;
 	craft_ui();
 	inventory_ui();
-	document.body.classList.remove('inventory-actions');
+	clear_inventory_actions();
 };
 
 craft_items = function () {
@@ -219,27 +221,17 @@ craft_items = function () {
 	craft.make();
 	craft_ui();
 	inventory_ui();
-	document.body.classList.remove('inventory-actions');
+	close_all_modals();
+	set_attributes();
 };
 
-close_all_modals = function () {
+clear_inventory_actions = function () {
 	document.body.classList.remove(
-		'inventory',
-		'container',
-		'note',
-		'craft',
 		'inventory-actions',
-		'craft-actions'
+		'action-use-item',
+		'action-craft-item',
+		'action-drop-item'
 	);
-
-	Craft.forEach((item) => {
-		Player.inventory.push(item);
-	});
-
-	if (Container) Container.toggle();
-	Container = null;
-	Item = null;
-	Craft = [];
 };
 
 const inventory = function () {

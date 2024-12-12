@@ -2,7 +2,6 @@ import TYPES from './types/index.js';
 
 set_attributes = function () {
 	if (!Player) return;
-
 	for (let attribute in Player.attributes) {
 		const container = document.querySelector(`[data-attribute="${attribute}"]`);
 

@@ -1,6 +1,6 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../inventory.js';
+import inventory from '../modals/inventory.js';
 
 const TRASHCAN_LOBBY = () => ({
 	id: null,
@@ -29,8 +29,8 @@ const TRASHCAN_LOBBY = () => ({
 	create: function (scene) {
 		if (!scene) return null;
 
-		let frame = 'frame_2';
-		if (this.inventory.length) frame = 'frame_1';
+		let frame = 'frame_1';
+		if (this.inventory.length) frame = 'frame_2';
 
 		const container = scene.matter.add
 			.sprite(this.x, this.y, 'transhcan_lobby', frame, {

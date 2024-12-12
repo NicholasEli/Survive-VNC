@@ -1,0 +1,41 @@
+<header>
+	<div class="player__attributes">
+		<div class="player__attribute player__attribute-health" title="Player Health">
+			<img src="./assets/hud/icon-health.png" alt="Player Health" />
+			<div data-attribute="health">
+				<span></span>
+				<div></div>
+			</div>
+		</div>
+		<div class="player__attribute player__attribute-thirst" title="Player Thirst">
+			<img src="./assets/hud/icon-thirst.png" alt="Player Thirst" />
+			<div data-attribute="thirst">
+				<span></span>
+				<div></div>
+			</div>
+		</div>
+		<div class="player__attribute player__attribute-hunger" title="Player Hunger">
+			<img src="./assets/hud/icon-hunger.png" alt="Player Hunger" />
+			<div data-attribute="hunger">
+				<span></span>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div class="player__attributes">
+		<div
+			class="player__attribute player__attribute-temperature hidden"
+			data-attribute="temperature"
+		>
+			<img src="./assets/hud/icon-temperature.png" alt="Player Is Cold" />
+		</div>
+		<div class="player__attribute player__attribute-illness hidden" data-attribute="illness">
+			<img src="./assets/hud/icon-illness.png" alt="Player Is Ill" />
+		</div>
+	</div>
+	<div class="player__actions" title="Player Inventory">
+		<button type="button" onclick="open_inventory()">
+			<img src="./assets/hud/inventory.png" alt="Open Inventory" />
+		</button>
+	</div>
+</header>

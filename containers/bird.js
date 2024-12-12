@@ -1,7 +1,7 @@
 import TYPES from '../../types/index.js';
 import Item from '../items/index.js';
 import { uuid, is_container_locked } from '../helpers.js';
-import inventory from '../inventory.js';
+import inventory from '../modals/inventory.js';
 import toast from '../toast.js';
 
 const BIRD = () => ({
@@ -20,6 +20,7 @@ const BIRD = () => ({
 	},
 	locked: true,
 	requirements: [TYPES.ITEMS.AXE],
+	illness: TYPES.ILLNESS.SALMONELLA,
 	load: function (scene) {
 		this.id = uuid();
 
@@ -31,8 +32,12 @@ const BIRD = () => ({
 
 		return scene;
 	},
-	create: function (scene) {
+	create: async function (scene) {
 		if (!scene) return null;
+
+		let req = await fetch('../assets/containers/bird_frames.json');
+		req = await req.json();
+		const num_frames = Object.keys(req.frames).length;
 
 		const container = scene.matter.add
 			.sprite(this.x, this.y, 'bird', 'frame_1', {
@@ -45,10 +50,10 @@ const BIRD = () => ({
 			frames: scene.anims.generateFrameNames('bird', {
 				prefix: 'frame_',
 				start: 1,
-				end: 3,
+				end: num_frames,
 				zeroPad: 1
 			}),
-			frameRate: 1,
+			frameRate: 5,
 			repeat: -1
 		});
 

@@ -1,11 +1,13 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../inventory.js';
+import inventory from '../modals/inventory.js';
 
 const DUMPSTER = () => ({
 	id: null,
 	name: TYPES.CONTAINERS.DUMPSTER,
 	instance: null,
+	width: 32,
+	height: 16,
 	x: 0,
 	y: 0,
 	active: false,
@@ -26,12 +28,17 @@ const DUMPSTER = () => ({
 
 		return scene;
 	},
-	create: function (scene) {
+	create: async function (scene) {
 		if (!scene) return null;
+
+		let req = await fetch('../assets/containers/dumpster_frames.json');
+		req = await req.json();
+		const num_frames = Object.keys(req.frames).length;
 
 		const container = scene.matter.add
 			.sprite(this.x, this.y, 'dumpster', 'frame_1', {
-				isStatic: true
+				isStatic: true,
+				isSensor: true
 			})
 			.setDepth(TYPES.ZINDEX.CONTAINER);
 
@@ -40,7 +47,7 @@ const DUMPSTER = () => ({
 			frames: scene.anims.generateFrameNames('dumpster', {
 				prefix: 'frame_',
 				start: 1,
-				end: 4,
+				end: num_frames,
 				zeroPad: 1
 			}),
 			frameRate: 10,
@@ -51,12 +58,17 @@ const DUMPSTER = () => ({
 			key: 'dumpster_close',
 			frames: scene.anims.generateFrameNames('dumpster', {
 				prefix: 'frame_',
-				start: 4,
+				start: num_frames,
 				end: 1,
 				zeroPad: 1
 			}),
 			frameRate: 10,
 			repeat: 0
+		});
+
+		scene.matter.add.rectangle(this.x, this.y, this.width, this.height, {
+			isStatic: true,
+			name: TYPES.CONTAINERS.DUMPSTER
 		});
 
 		container.id = this.id;
@@ -87,8 +99,7 @@ const DUMPSTER = () => ({
 
 		this.instance.play('dumpster_open').on('animationcomplete', () => {
 			if (this.active) {
-				document.body.classList.add('container');
-				document.body.classList.add('inventory');
+				document.body.classList.add('container', 'inventory');
 			}
 		});
 

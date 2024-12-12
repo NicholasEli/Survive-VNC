@@ -1,4 +1,5 @@
 import TYPES from './types/index.js';
+import Containers from './containers/index.js';
 
 Region = {
 	config: null,
@@ -16,19 +17,25 @@ Region = {
 			console.error('Error loading background image');
 		});
 
-		scene.load
-			.image('foreground', `${this.config.environment.foreground.src}?v=${Date.now()}`)
-			.on('error', () => {
-				console.error('Error loading foreground image');
-			});
+		if (this.config.environment.foreground.src) {
+			scene.load
+				.image('foreground', `${this.config.environment.foreground.src}?v=${Date.now()}`)
+				.on('error', () => {
+					console.error('Error loading foreground image');
+				});
+		}
 
-		scene.load
-			.image('background', `${this.config.environment.background.src}?v=${Date.now()}`)
-			.on('error', () => {
-				console.error('Error loading background image');
-			});
+		if (this.config.environment.background.src) {
+			scene.load
+				.image('background', `${this.config.environment.background.src}?v=${Date.now()}`)
+				.on('error', () => {
+					console.error('Error loading background image');
+				});
+		}
 
-		this.config.environment.containers.forEach((container) => container.load(scene));
+		this.config.environment.containers.forEach((container) => {
+			container.load(scene);
+		});
 	},
 	create: function (scene) {
 		const { width, height } = this.config;
