@@ -184,10 +184,10 @@ use_item = function () {
 
 drop_item = function () {
 	if (!Player || !Item) return;
-
-	Player.inventory = Player.inventory.filter((item) => item.id !== Item.id);
-	inventory_ui();
 	clear_inventory_actions();
+	Player.drop(Item);
+	close_all_modals();
+	inventory_ui();
 };
 
 return_item = function () {

@@ -32,11 +32,41 @@ Player = {
 	orientation: 'forward',
 	tween: null,
 	sprite: {
-		type: TYPES.CLOTHING.PLAIN
+		type: TYPES.CLOTHING.PLAIN,
+		frames: []
 	},
 	moving: false,
-	init: function () {
+	init: async function () {
 		console.log('--Init Player--');
+
+		let req = await fetch('/assets/player/frames.json');
+		if (req.ok) {
+			req = await req.json();
+
+			const frames = {};
+			for (let f in req.frames) {
+				const { frame, group } = req.frames[f];
+
+				//start
+				if (!frames[group]) {
+					const start = f.split('_')[1];
+					frames[group] = {
+						key: 'player_' + group,
+						start
+					};
+				}
+
+				if (frames[group]) {
+					const end = f.split('_')[1];
+					frames[group].end = end;
+				}
+			}
+
+			for (let frame in frames) {
+				this.sprite.frames.push(frames[frame]);
+			}
+		}
+
 		if (Region) {
 			this.x = Region.config.player.start.x;
 			this.y = Region.config.player.start.y;
@@ -48,7 +78,7 @@ Player = {
 		scene.load.atlas(
 			this.sprite.type,
 			`assets/player/${this.gender}/${this.sprite.type}/sprite.png`,
-			`assets/player/${this.gender}/${this.sprite.type}/frames.json`
+			`assets/player/frames.json`
 		);
 
 		return scene;
@@ -59,15 +89,8 @@ Player = {
 			.setScale(0.58)
 			.setDepth(TYPES.ZINDEX.PLAYER);
 
-		const orientations = [
-			{ key: 'player_move_forward', start: 1, end: 9 },
-			{ key: 'player_move_backward', start: 11, end: 18 },
-			{ key: 'player_move_left', start: 19, end: 27 },
-			{ key: 'player_move_right', start: 28, end: 36 }
-		];
-
-		orientations.forEach((orientation) => {
-			const { key, start, end } = orientation;
+		this.sprite.frames.forEach((frame) => {
+			const { key, start, end } = frame;
 
 			scene.anims.create({
 				key,
@@ -106,6 +129,8 @@ Player = {
 		this.orientation = orientation;
 		this.instance.play('player_move_' + orientation);
 
+		this.instance.play('player_move_' + orientation);
+
 		this.tween = scene.tweens.add({
 			targets: this.instance,
 			x: toX,
@@ -123,6 +148,17 @@ Player = {
 			return;
 		}
 		this.inventory.push(item);
+	},
+	drop: function (item) {
+		if (!item) return;
+		this.remove(item);
+		console.log(this.instance);
+		//this.instance.play('player_move_' + orientation);
+		//this.instance.play('player_grab_backwards');
+		this.instance.anims.play({
+			key: 'player_grab_backwards',
+			repeat: 0
+		});
 	},
 	remove: function (item) {
 		this.inventory = this.inventory.filter((i) => i.id != item.id);
@@ -174,11 +210,33 @@ Player = {
 			this.attributes.health = this.attributes.health - 1;
 		}
 	},
+	health: function () {
+		if (this.attributes.health <= 0) {
+			console.log('You have died');
+			return;
+		}
+
+		return this.attributes.health;
+	},
 	hunger: function () {
+		if (this.attributes.hunger <= 0 && this.attributes.health > 0) {
+			this.attributes.health = this.attributes.health - 1;
+			this.attributes.hunger = 0;
+			return this.attributes.hunger;
+		}
+
 		this.attributes.hunger = this.attributes.hunger - 1;
+		return this.attributes.hunger;
 	},
 	thirst: function () {
+		if (this.attributes.thirst <= 0 && this.attributes.health > 0) {
+			this.attributes.health = this.attributes.health - 1;
+			this.attributes.thirst = 0;
+			return this.attributes.thirst;
+		}
+
 		this.attributes.thirst = this.attributes.thirst - 2;
+		return this.attributes.thirst;
 	},
 	temperature: function () {
 		this.attributes.temperature = this.attributes.temperature - 1;

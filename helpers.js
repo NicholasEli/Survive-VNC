@@ -72,11 +72,11 @@ export const degree = function (fromX, fromY, toX, toY) {
 
 export const sprite_orientation = function (degrees) {
 	if (degrees > 325) return 'right';
-	if (degrees > 215) return 'backward';
+	if (degrees > 215) return 'backwards';
 	if (degrees > 125) return 'left';
 	if (degrees < 65) return 'right';
 
-	return 'forward';
+	return 'forwards';
 };
 
 /**

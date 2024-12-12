@@ -13,7 +13,7 @@ window.onload = async function () {
 
 	const canvas = document.getElementById('canvas');
 	const region = Region.init(EsterShortPark);
-	const player = Player.init();
+	const player = await Player.init();
 
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -24,12 +24,16 @@ window.onload = async function () {
 
 	const lifecycle = async function () {
 		if (!Player) return;
-		await async_timeout(10000);
+		await async_timeout(5000);
 
 		Player.illness();
 		Player.hunger();
 		Player.thirst();
+		const player_health = Player.health();
 		set_attributes();
+
+		if (player_health <= 0) return;
+
 		lifecycle();
 	};
 
