@@ -28,6 +28,7 @@ window.onload = async function () {
 
 		Player.illness();
 		Player.hunger();
+		Player.thirst();
 		set_attributes();
 		lifecycle();
 	};
