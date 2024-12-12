@@ -12,12 +12,12 @@ const events = {
 			};
 			const target = targets[0];
 			console.clear();
-			console.log({ x, y }, grid);
+			console.log({ x, y }, { grid });
 
 			if (target && target.object && target.object == TYPES.CONTAINERS.CONTAINER) {
 				const _distance = distance(Player.instance.x, Player.instance.y, target.x, target.y);
 
-				if (_distance > 200) {
+				if (_distance > 50) {
 					toast.danger(TYPES.PLAYER.ACTIONS.CLICK.DISTANCE);
 					return;
 				}
@@ -28,6 +28,17 @@ const events = {
 			}
 
 			if (out_of_bounds(x, y)) return;
+
+			const _distance = distance(
+				Player.instance.x,
+				Player.instance.y,
+				pointer.worldX,
+				pointer.worldY
+			);
+
+			if (_distance > 125) {
+				Player.actions(TYPES.ILLNESS.SPRAIN);
+			}
 
 			Player.move(scene, x, y);
 			set_attributes();

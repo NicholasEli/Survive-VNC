@@ -93,7 +93,11 @@ Player = {
 	move: function (scene, toX, toY) {
 		if (this.moving == true) return;
 
-		const _distance = distance(this.instance.x, this.instance.y, toX, toY);
+		let _distance = distance(this.instance.x, this.instance.y, toX, toY);
+		if (Player.attributes.illness == TYPES.ILLNESS.SPRAIN) {
+			_distance = _distance + 100;
+		}
+
 		const _degree = degree(this.instance.x, this.instance.y, toX, toY);
 		const orientation = sprite_orientation(_degree);
 		const speed = this.getSpeed(_distance);
@@ -137,18 +141,27 @@ Player = {
 		const is_cured = Math.round(Math.random());
 		const is_sick = Math.round(Math.random());
 
+		/** Cures **/
+
 		if (action == TYPES.ACTIONS.WASH_HANDS && is_cured) {
 			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.HEALTHY);
 			return;
 		}
+
+		if (action == TYPES.ACTIONS.WRAP_SPRAIN && is_cured) {
+			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.HEALTHY);
+			return;
+		}
+
+		/** Illnesses **/
 
 		if (action == TYPES.ILLNESS.SALMONELLA && is_sick) {
 			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.SALMONELLA);
 			return;
 		}
 
-		if (action == TYPES.ACTIONS.WRAP_SPRAIN && is_cured) {
-			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.HEALTHY);
+		if (action == TYPES.ILLNESS.SPRAIN && is_sick) {
+			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.SPRAIN);
 			return;
 		}
 	},
