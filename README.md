@@ -1,63 +1,53 @@
-# Survive VNC
+# Game
 
-| Attributes  |
-| ----------- |
-| Health      |
-| Hunger      |
-| Illness     |
-| Temperature |
-| Thirst      |
+#game
 
-| Illnesses  |
-| ---------- |
-| Salmonella |
+[preview](https://raw.githubusercontent.com/NicholasEli/Survive-VNC/refs/heads/main/assets/preview.png)
 
-| Items           |
-| --------------- |
-| Ash             |
-| Axe             |
-| Bottle          |
-| Fire            |
-| Firewood        |
-| Letter Blank    |
-| Letter Recevied |
-| Meat Cooked     |
-| Meat Raw        |
-| Rock            |
-| Shovel          |
-| Water           |
+### Items
 
-| Containers     |
-| -------------- |
-| Bird           |
-| Campfire       |
-| Dumpster       |
-| Log            |
-| Porta Potty    |
-| Rock Pile      |
-| Sandbox        |
-| Trashcan Lobby |
-| WATER          |
-
-| Items           |
-| --------------- |
-| Ash             |
-| Axe             |
-| Bottle          |
-| Fire            |
-| Firewood        |
-| Letter Blank    |
-| Letter Recevied |
-| Meat Cooked     |
-| Meat Raw        |
-| Rock            |
-| Shovel          |
-| Water           |
+- Shovel
+- Bucket
+- Bottle
+- Food
+- Clothes -> Rags
+- Logs
+- Axe
+- Sleeping Bag
+- Backpack
+- Letter Blank
+- Letter Received
+- Latern
+  - Vegetation/Plants/Berries/Mushrooms
+- Meat (Bird, Crab, Fish
 
 ### Crafting
 
-| Ingredient 1 | Ingredient 2 | Ingredient 3 | Result       |
-| ------------ | ------------ | ------------ | ------------ |
-| Firewood     | Axe          | Rock         | Campfire     |
-| Bottle       | Water        |              | Wash Hands   |
-|              |              |              | Letter Blank |
+- Wood + Axe + Rock = Fire √
+- Bird + Axe = Bird Breast √
+- Bird + Campfire = Cooked Bird √
+
+- Boiled Water + Rags = Clean Hands √
+
+- Axe + Clothes = Rags
+- Rags + Herbs = Medicine
+- Rags + Sticks = Backpack
+- ? + Paper = Letter
+
+### Needs
+
+- Sleep
+- Water
+- Food
+- Medicine (If Sick)
+- Companion?
+- Mental Health
+
+### Clothing
+
+- Hat
+- Shirt (Changing - no visible Change)
+- Sweater
+- Jacket
+- Backpack
+- Shoes (Changing - no visible Change)
