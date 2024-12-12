@@ -14,6 +14,7 @@
 
 | Illnesses  |
 | ---------- |
+| Sprain     |
 | Salmonella |
 
 | Items           |
