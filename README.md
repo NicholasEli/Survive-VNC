@@ -2,7 +2,7 @@
 
 #game
 
-[preview](https://raw.githubusercontent.com/NicholasEli/Survive-VNC/refs/heads/main/assets/preview.png)
+<img src="https://raw.githubusercontent.com/NicholasEli/Survive-VNC/refs/heads/main/assets/preview.png" />
 
 ### Items
 
