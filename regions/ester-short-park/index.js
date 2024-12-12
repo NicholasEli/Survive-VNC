@@ -11,8 +11,8 @@ const EsterShortPark = {
 	height,
 	player: {
 		start: {
-			x: 160,
-			y: 240
+			x: 0,
+			y: 0
 		}
 	},
 	map: {
