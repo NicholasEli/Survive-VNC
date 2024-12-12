@@ -1,5 +1,17 @@
 # Survive VNC
 
+| Attributes  |
+| ----------- |
+| Health      |
+| Hunger      |
+| Illness     |
+| Temperature |
+| Thirst      |
+
+| Illnesses  |
+| ---------- |
+| Salmonella |
+
 | Items           |
 | --------------- |
 | Ash             |
@@ -27,21 +39,25 @@
 | Trashcan Lobby |
 | WATER          |
 
-| Attributes  |
-| ----------- |
-| Health      |
-| Hunger      |
-| Illness     |
-| Temperature |
-| Thirst      |
+| Items           |
+| --------------- |
+| Ash             |
+| Axe             |
+| Bottle          |
+| Fire            |
+| Firewood        |
+| Letter Blank    |
+| Letter Recevied |
+| Meat Cooked     |
+| Meat Raw        |
+| Rock            |
+| Shovel          |
+| Water           |
 
-| Illnesses  |
-| ---------- |
-| Salmonella |
+### Crafting
 
-### Crafter
-
-| Ingredient 1 | Ingredient 2 | Ingredient 3 | Result     |
-| ------------ | ------------ | ------------ | ---------- |
-| Firewood     | Axe          | Rock         | Campfire   |
-| Bottle       | Water        |              | Wash Hands |
+| Ingredient 1 | Ingredient 2 | Ingredient 3 | Result       |
+| ------------ | ------------ | ------------ | ------------ |
+| Firewood     | Axe          | Rock         | Campfire     |
+| Bottle       | Water        |              | Wash Hands   |
+|              |              |              | Letter Blank |

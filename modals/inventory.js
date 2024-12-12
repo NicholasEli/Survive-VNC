@@ -140,6 +140,7 @@ const craft_ui = function () {
 
 	if (match && match.CONTAINER) craftable.innerText = match.CONTAINER;
 	if (match && match.ACTION) craftable.innerText = match.ACTION;
+	if (match && match.ITEMS) craftable.innerText = match.ITEMS;
 
 	if (!match) {
 		craftable.innerText = 'None';

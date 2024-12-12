@@ -1,6 +1,6 @@
 import TYPES from '../types/index.js';
 import Containers from '../containers/index.js';
-import Items from '../items/index.js';
+import Item from '../items/index.js';
 import toast from '../toast.js';
 import events from '../events.js';
 
@@ -12,7 +12,6 @@ const craft = {
 		}
 
 		const set = new Set(Craft.map((item) => item.type));
-
 		for (const [item, { INGREDIENTS }] of Object.entries(TYPES.CRAFT)) {
 			const match = INGREDIENTS.every((ingredient) => set.has(ingredient));
 
@@ -53,8 +52,10 @@ const craft = {
 			await container.create(scene);
 		}
 
-		if (match.ITEM) {
-			//
+		if (match.ITEMS) {
+			match.ITEMS.forEach((item) => {
+				Player.inventory.push({ ...Item(TYPES.ITEMS[item]) });
+			});
 		}
 
 		if (match.ACTION) {

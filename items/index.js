@@ -13,6 +13,7 @@ const Item = (type) => {
 		y: 0
 	};
 
+	/** Bottles **/
 	if (type == TYPES.ITEMS.BOTTLE) {
 		item.use = function () {
 			const water = Player.inventory.find((item) => item.type == TYPES.ITEMS.WATER);
@@ -27,6 +28,7 @@ const Item = (type) => {
 		};
 	}
 
+	/** Letter **/
 	if (type == TYPES.ITEMS.LETTER_BLANK || type == TYPES.LETTER_RECEIVED) {
 		item.use = function () {
 			close_all_modals();
@@ -43,6 +45,14 @@ const Item = (type) => {
 	if (type == TYPES.ITEMS.LETTER_BLANK) {
 		item.message = '';
 		item.readonly = false;
+	}
+
+	/** Rag **/
+	if (type == TYPES.ITEMS.RAG) {
+		item.use = function () {
+			Player.remove(item);
+			Player.actions(TYPES.ACTIONS.WRAP_SPRAIN);
+		};
 	}
 
 	return item;

@@ -15,7 +15,9 @@ Player = {
 		{ ...Item(TYPES.ITEMS.MEAT_RAW) },
 		{ ...Item(TYPES.ITEMS.BOTTLE) },
 		{ ...Item(TYPES.ITEMS.WATER) },
-		{ ...Item(TYPES.ITEMS.LETTER_BLANK) }
+		{ ...Item(TYPES.ITEMS.LETTER_BLANK) },
+		{ ...Item(TYPES.ITEMS.SHIRT) },
+		{ ...Item(TYPES.ITEMS.RAG) }
 	],
 	capacity: TYPES.PLAYER.CAPACITY,
 	backpack: null,
@@ -144,10 +146,19 @@ Player = {
 			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.SALMONELLA);
 			return;
 		}
+
+		if (action == TYPES.ACTIONS.WRAP_SPRAIN && is_cured) {
+			this.setAttribute(TYPES.PLAYER.ATTRIBUTES.ILLNESS, TYPES.ILLNESS.HEALTHY);
+			return;
+		}
 	},
 	illness: function () {
 		if (this.attributes.illness == TYPES.ILLNESS.SALMONELLA) {
 			this.attributes.health = this.attributes.health - 3;
+		}
+
+		if (this.attributes.illness == TYPES.ILLNESS.SPRAIN) {
+			this.attributes.health = this.attributes.health - 1;
 		}
 	},
 	hunger: function () {

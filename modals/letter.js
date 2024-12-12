@@ -6,7 +6,12 @@ export const letter_ui = function () {
 
 	message.value = Letter.message;
 
+	if (Letter.type == TYPES.ITEMS.LETTER_RECEIVED) {
+		message.readonly = true;
+	}
+
 	if (Letter.type == TYPES.ITEMS.LETTER_BLANK) {
+		message.readonly = false;
 		message.addEventListener('keyup', set_letter_message);
 	}
 };

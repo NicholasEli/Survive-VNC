@@ -8,7 +8,9 @@ const SOURCE = {
 	LETTER_RECEIVED: './assets/items/letter-received.png',
 	MEAT_COOKED: '/assets/items/meat-cooked.png',
 	MEAT_RAW: '/assets/items/meat-raw.png',
+	RAG: '/assets/items/rag.png',
 	ROCK: '/assets/items/rock.png',
+	SHIRT: '/assets/items/shirt.png',
 	SHOVEL: '/assets/items/shovel.png',
 	WATER: '/assets/items/water.png'
 };
