@@ -1,6 +1,8 @@
 import TYPES from './types/index.js';
 import { distance, out_of_bounds } from './helpers.js';
 import toast from './toast.js';
+import inventory from './modals/inventory.js';
+import container from './modals/container.js';
 
 const events = {
 	click: function (scene, target) {
@@ -17,13 +19,14 @@ const events = {
 			if (target && target.object && target.object == TYPES.CONTAINERS.CONTAINER) {
 				const _distance = distance(Player.instance.x, Player.instance.y, target.x, target.y);
 
-				if (_distance > 50) {
+				if (_distance > 75) {
 					toast.danger(TYPES.PLAYER.ACTIONS.CLICK.DISTANCE);
 					return;
 				}
 
 				const is_open = target.data.toggle(scene);
-
+				inventory.ui();
+				container.ui();
 				return target;
 			}
 

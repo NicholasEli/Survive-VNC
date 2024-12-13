@@ -1,7 +1,6 @@
 import TYPES from '../../types/index.js';
 import Item from '../items/index.js';
 import { uuid, async_timeout } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 
 const CAMPFIRE = () => ({
 	id: null,
@@ -144,7 +143,6 @@ const CAMPFIRE = () => ({
 				if (item.type == TYPES.ITEMS.FIRE || item.type == TYPES.ITEMS.MEAT_COOKED) return item;
 			});
 
-			inventory();
 			this.condition = this.condition - 10;
 
 			if (this.condition <= 0) return;

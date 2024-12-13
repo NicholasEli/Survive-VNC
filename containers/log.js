@@ -1,6 +1,5 @@
 import TYPES from '../../types/index.js';
 import { uuid, is_container_locked } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 import toast from '../toast.js';
 
 const LOG = () => ({
@@ -76,7 +75,6 @@ const LOG = () => ({
 		}
 
 		Container = this;
-		inventory();
 		this.active = true;
 		document.body.classList.add('container');
 

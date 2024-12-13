@@ -24,6 +24,10 @@ export const get_templates = async function (template_paths) {
 	await _render_template();
 };
 
+export const ran_num = function (limit = 10) {
+	return Math.floor(Math.random() * limit) + 1;
+};
+
 /**
  * Generate UUI
  * @return { string } random string of characters and number

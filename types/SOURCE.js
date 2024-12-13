@@ -1,6 +1,7 @@
 const SOURCE = {
 	ASH: '/assets/items/ash.png',
 	AXE: '/assets/items/axe.png',
+	BACKPACK: '/assets/items/backpack.png',
 	BOTTLE: '/assets/items/bottle.png',
 	FIRE: '/assets/items/fire.png',
 	FIREWOOD: '/assets/items/fire-wood.png',
@@ -12,6 +13,7 @@ const SOURCE = {
 	ROCK: '/assets/items/rock.png',
 	SHIRT: '/assets/items/shirt.png',
 	SHOVEL: '/assets/items/shovel.png',
+	SLEEPING_BAG: '/assets/items/sleeping-bag.png',
 	WATER: '/assets/items/water.png'
 };
 

@@ -1,6 +1,5 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 
 const PORTA_POTTY = () => ({
 	id: null,
@@ -86,7 +85,6 @@ const PORTA_POTTY = () => ({
 
 		this.active = true;
 		Container = this;
-		inventory();
 
 		this.instance.play('porta-potty-open');
 		this.instance.play('porta-potty-open').on('animationcomplete', () => {

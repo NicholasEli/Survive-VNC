@@ -5,6 +5,7 @@
 const CONSUMABLE = {
 	ASH: true,
 	AXE: false,
+	BACKPACK: true,
 	BOTTLE: true,
 	FIRE: true,
 	FIREWOOD: true,
@@ -15,6 +16,7 @@ const CONSUMABLE = {
 	RAG: true,
 	ROCK: false,
 	SHIRT: true,
+	SLEEPING_BAG: false,
 	SHOVEL: false,
 	WATER: true
 };

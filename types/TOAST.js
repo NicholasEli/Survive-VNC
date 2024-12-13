@@ -1,7 +1,8 @@
 const TOAST = {
 	PLAYER: {
 		INVENTORY: {
-			FULL: 'Your inventory is full'
+			FULL: 'Your inventory is full',
+			OVER_ENCUMBERED: 'You are over encumbered'
 		}
 	},
 	CONTAINER: {

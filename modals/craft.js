@@ -5,6 +5,48 @@ import toast from '../toast.js';
 import events from '../events.js';
 
 const craft = {
+	ui: function () {
+		const wrapper = document.querySelector('[data-el="craft-items"]');
+		wrapper.innerHTML = '';
+
+		if (Craft.length < 2) {
+			document.body.classList.remove('craft-actions');
+		} else {
+			document.body.classList.add('craft-actions');
+		}
+
+		const match = craft.match();
+		const craftable = document.querySelector('[data-el="craftable"]');
+
+		if (match && match.CONTAINER) craftable.innerText = match.CONTAINER;
+		if (match && match.ACTION) craftable.innerText = match.ACTION;
+		if (match && match.ITEMS) craftable.innerText = match.ITEMS;
+
+		if (!match) {
+			craftable.innerText = 'None';
+		}
+
+		Craft.forEach((item) => {
+			const btn = document.createElement('button');
+			const image = document.createElement('img');
+			const span = document.createElement('span');
+
+			btn.classList.add('craft__item');
+			btn.title = item.type.replace(/_/g, ' ');
+			btn.setAttribute('data-craft-item', item.id);
+
+			image.src = TYPES.SOURCE[item.type];
+
+			btn.append(image);
+			btn.append(span);
+			wrapper.appendChild(btn);
+
+			btn.addEventListener('click', () => {
+				Item = item;
+				return_item();
+			});
+		});
+	},
 	match: function () {
 		if (!Craft) {
 			toast.danger(TYPES.TOAST.CRAFT.EMPTY);

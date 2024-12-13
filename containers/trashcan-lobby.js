@@ -1,6 +1,5 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 
 const TRASHCAN_LOBBY = () => ({
 	id: null,
@@ -74,7 +73,6 @@ const TRASHCAN_LOBBY = () => ({
 		}
 
 		Container = this;
-		inventory();
 		this.active = true;
 		document.body.classList.add('container');
 		document.body.classList.add('inventory');

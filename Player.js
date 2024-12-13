@@ -1,6 +1,6 @@
 import TYPES from './types/index.js';
 import toast from './toast.js';
-import { degree, sprite_orientation, distance } from './helpers.js';
+import { degree, sprite_orientation, distance, ran_num } from './helpers.js';
 import Item from './items/index.js';
 
 Player = {
@@ -9,24 +9,31 @@ Player = {
 	instance: null,
 	inventory: [
 		{ ...Item(TYPES.ITEMS.AXE) },
-		{ ...Item(TYPES.ITEMS.SHOVEL) },
-		{ ...Item(TYPES.ITEMS.FIREWOOD) },
-		{ ...Item(TYPES.ITEMS.ROCK) },
-		{ ...Item(TYPES.ITEMS.MEAT_RAW) },
+		//{ ...Item(TYPES.ITEMS.BACKPACK) },
 		{ ...Item(TYPES.ITEMS.BOTTLE) },
-		{ ...Item(TYPES.ITEMS.WATER) },
+		{ ...Item(TYPES.ITEMS.FIREWOOD) },
 		{ ...Item(TYPES.ITEMS.LETTER_BLANK) },
+		//{ ...Item(TYPES.ITEMS.MEAT_RAW) },
+		{ ...Item(TYPES.ITEMS.RAG) },
+		// { ...Item(TYPES.ITEMS.RAG) },
+		// { ...Item(TYPES.ITEMS.RAG) },
+		// { ...Item(TYPES.ITEMS.RAG) },
+		{ ...Item(TYPES.ITEMS.ROCK) },
 		{ ...Item(TYPES.ITEMS.SHIRT) },
-		{ ...Item(TYPES.ITEMS.RAG) }
+		// { ...Item(TYPES.ITEMS.SHIRT) },
+		// { ...Item(TYPES.ITEMS.SHIRT) },
+		//{ ...Item(TYPES.ITEMS.SHOVEL) },
+		{ ...Item(TYPES.ITEMS.SLEEPING_BAG) },
+		{ ...Item(TYPES.ITEMS.WATER) }
 	],
-	capacity: TYPES.PLAYER.CAPACITY,
 	backpack: null,
 	attributes: {
 		health: 100,
 		temperature: 100,
 		illness: TYPES.ILLNESS.HEALTHY,
 		hunger: 100,
-		thirst: 100
+		thirst: 100,
+		capacity: TYPES.PLAYER.CAPACITY
 	},
 	gender: TYPES.PLAYER.GENDERS.FEMALE,
 	orientation: 'forward',
@@ -84,9 +91,11 @@ Player = {
 		return scene;
 	},
 	create: function (scene) {
+		this.capacity();
+
 		const player = scene.matter.add
 			.sprite(this.x, this.y, this.sprite.type, 'frame_1')
-			.setScale(0.58)
+			.setScale(0.5)
 			.setDepth(TYPES.ZINDEX.PLAYER);
 
 		this.sprite.frames.forEach((frame) => {
@@ -116,6 +125,18 @@ Player = {
 	move: function (scene, toX, toY) {
 		if (this.moving == true) return;
 
+		const capacity = this.capacity();
+
+		if (this.inventory.length > capacity) {
+			const drop_item = Math.round(Math.random());
+
+			if (drop_item) {
+				const item_index = ran_num(this.inventory.length);
+				this.remove(this.inventory[item_index]);
+				toast.danger(TYPES.TOAST.PLAYER.INVENTORY.OVER_ENCUMBERED);
+			}
+		}
+
 		let _distance = distance(this.instance.x, this.instance.y, toX, toY);
 		if (Player.attributes.illness == TYPES.ILLNESS.SPRAIN) {
 			_distance = _distance + 100;
@@ -129,8 +150,6 @@ Player = {
 		this.orientation = orientation;
 		this.instance.play('player_move_' + orientation);
 
-		this.instance.play('player_move_' + orientation);
-
 		this.tween = scene.tweens.add({
 			targets: this.instance,
 			x: toX,
@@ -138,30 +157,54 @@ Player = {
 			duration: speed,
 			onComplete: () => {
 				this.moving = false;
-				this.instance.stop('walk_' + orientation);
+				this.instance.stop();
 			}
 		});
 	},
+	remove: function (item) {
+		this.capacity();
+		this.inventory = this.inventory.filter((i) => i.id != item.id);
+	},
 	take: function (item) {
-		if (this.inventory.length + 1 > this.capacity) {
+		const capacity = this.capacity();
+
+		if (this.inventory.length + 1 > capacity) {
 			toast.danger(TYPES.TOAST.PLAYER.INVENTORY.FULL);
 			return;
 		}
+
 		this.inventory.push(item);
 	},
 	drop: function (item) {
 		if (!item) return;
+		this.moving = true;
 		this.remove(item);
-		console.log(this.instance);
-		//this.instance.play('player_move_' + orientation);
-		//this.instance.play('player_grab_backwards');
-		this.instance.anims.play({
-			key: 'player_grab_backwards',
-			repeat: 0
-		});
+		this.capacity();
+
+		this.instance.anims
+			.play({
+				key: 'player_grab_' + this.orientation,
+				repeat: 0
+			})
+			.on('animationcomplete', () => {
+				this.moving = false;
+				this.instance.play('player_move_' + this.orientation);
+				this.instance.stop();
+			});
 	},
-	remove: function (item) {
-		this.inventory = this.inventory.filter((i) => i.id != item.id);
+	capacity: function () {
+		let capacity = TYPES.PLAYER.CAPACITY;
+		let backpack_capacity = 0;
+		const backpacks = this.inventory.filter((item) => item.type == TYPES.ITEMS.BACKPACK);
+
+		backpacks.forEach((backpack) => {
+			if (backpack.capacity > backpack_capacity) {
+				backpack_capacity = backpack.capacity;
+			}
+		});
+
+		this.attributes.capacity = capacity + backpack_capacity;
+		return this.attributes.capacity;
 	},
 	setAttribute: function (attribute, adjustment) {
 		if (!attribute || !adjustment) return;
@@ -210,10 +253,16 @@ Player = {
 			this.attributes.health = this.attributes.health - 1;
 		}
 	},
-	health: function () {
+	health: function (health) {
 		if (this.attributes.health <= 0) {
 			console.log('You have died');
 			return;
+		}
+
+		if (health) {
+			this.attributes.health = this.attributes.health + health;
+
+			if (this.attributes.health > 100) this.attributes.health = 100;
 		}
 
 		return this.attributes.health;

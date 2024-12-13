@@ -1,7 +1,6 @@
 import TYPES from '../../types/index.js';
 import Item from '../items/index.js';
 import { uuid, is_container_locked } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 import toast from '../toast.js';
 
 const ROCK_PILE = () => ({
@@ -74,9 +73,9 @@ const ROCK_PILE = () => ({
 		}
 
 		Container = this;
-		inventory();
+		container.ui();
 		this.active = true;
-		document.body.classList.add('container', 'inventory');
+		document.body.classList.add('container');
 
 		return true;
 	},

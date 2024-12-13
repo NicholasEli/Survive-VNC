@@ -1,6 +1,5 @@
 import TYPES from '../../types/index.js';
 import { uuid } from '../helpers.js';
-import inventory from '../modals/inventory.js';
 
 const DUMPSTER = () => ({
 	id: null,
@@ -93,7 +92,6 @@ const DUMPSTER = () => ({
 
 		this.active = true;
 		Container = this;
-		inventory();
 
 		this.instance.play('dumpster_open');
 
