@@ -24,17 +24,17 @@ window.onload = async function () {
 
 	const lifecycle = async function () {
 		if (!Player) return;
-		await async_timeout(5000);
+		await async_timeout(6000);
+		const player_health = Player.health();
+
+		if (player_health <= 0 || !player_health) return;
 
 		Player.illness();
 		Player.hunger();
 		Player.thirst();
-		const player_health = Player.health();
 		set_attributes();
 
-		if (player_health <= 0) return;
-
-		lifecycle();
+		await lifecycle();
 	};
 
 	Game = new Phaser.Game({

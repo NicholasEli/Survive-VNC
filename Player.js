@@ -255,7 +255,11 @@ Player = {
 	},
 	health: function (health) {
 		if (this.attributes.health <= 0) {
-			console.log('You have died');
+			this.moving = true;
+			this.instance.play({
+				key: 'player_dead',
+				repeat: 0
+			});
 			return;
 		}
 
