@@ -1,4 +1,5 @@
 import TYPES from '../types/index.js';
+import Player from '../Player.js';
 
 const bottle = function (item) {
 	item.use = function () {

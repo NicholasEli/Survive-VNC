@@ -1,3 +1,5 @@
+import Player from './Player.js';
+
 /**
  * Renders an array of template paths
  * @param { array } template_paths - array of template source paths

@@ -1,4 +1,5 @@
 import TYPES from '../types/index.js';
+import Player from '../Player.js';
 import toast from '../toast.js';
 import inventory from './inventory.js';
 

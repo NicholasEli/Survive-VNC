@@ -1,4 +1,5 @@
 import TYPES from './types/index.js';
+import Player from './Player.js';
 
 set_attributes = function () {
 	if (!Player) return;

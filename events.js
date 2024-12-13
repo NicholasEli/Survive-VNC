@@ -1,5 +1,6 @@
 import TYPES from './types/index.js';
 import { distance, out_of_bounds } from './helpers.js';
+import Player from './Player.js';
 import toast from './toast.js';
 import modal_inventory from './modals/inventory.js';
 import modal_container from './modals/container.js';
@@ -13,8 +14,6 @@ const events = {
 				y: Math.round(y / 16) * 16
 			};
 			const target = targets[0];
-			console.clear();
-			console.log({ x, y }, { grid });
 
 			if (target && target.object && target.object == TYPES.CONTAINERS.CONTAINER) {
 				const _distance = distance(Player.instance.x, Player.instance.y, target.x, target.y);

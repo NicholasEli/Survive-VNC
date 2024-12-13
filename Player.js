@@ -1,31 +1,12 @@
 import TYPES from './types/index.js';
 import toast from './toast.js';
 import { degree, sprite_orientation, distance, ran_num } from './helpers.js';
-import Item from './items/index.js';
 
-Player = {
+const Player = {
 	x: 0,
 	y: 0,
 	instance: null,
-	inventory: [
-		{ ...Item(TYPES.ITEMS.AXE) },
-		//{ ...Item(TYPES.ITEMS.BACKPACK) },
-		{ ...Item(TYPES.ITEMS.BOTTLE) },
-		{ ...Item(TYPES.ITEMS.FIREWOOD) },
-		{ ...Item(TYPES.ITEMS.LETTER_BLANK) },
-		//{ ...Item(TYPES.ITEMS.MEAT_RAW) },
-		{ ...Item(TYPES.ITEMS.RAG) },
-		// { ...Item(TYPES.ITEMS.RAG) },
-		// { ...Item(TYPES.ITEMS.RAG) },
-		// { ...Item(TYPES.ITEMS.RAG) },
-		{ ...Item(TYPES.ITEMS.ROCK) },
-		{ ...Item(TYPES.ITEMS.SHIRT) },
-		// { ...Item(TYPES.ITEMS.SHIRT) },
-		// { ...Item(TYPES.ITEMS.SHIRT) },
-		//{ ...Item(TYPES.ITEMS.SHOVEL) },
-		{ ...Item(TYPES.ITEMS.SLEEPING_BAG) },
-		{ ...Item(TYPES.ITEMS.WATER) }
-	],
+	inventory: [],
 	backpack: null,
 	hbc: 100,
 	attributes: {

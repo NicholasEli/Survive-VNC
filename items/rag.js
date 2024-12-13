@@ -1,3 +1,6 @@
+import TYPES from '../types/index.js';
+import Player from '../Player.js';
+
 const rag = function (item) {
 	item.use = function () {
 		Player.remove(item);

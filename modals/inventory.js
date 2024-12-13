@@ -1,4 +1,5 @@
 import TYPES from '../types/index.js';
+import Player from '../Player.js';
 import toast from '../toast.js';
 import container from './container.js';
 import craft from './craft.js';
@@ -15,7 +16,6 @@ modal_inventory = {
 
 		const wrapper = document.querySelector('[data-el="inventory-items"]');
 		wrapper.innerHTML = '';
-
 		const hbc = document.createElement('div');
 		hbc.classList.add('inventory__item', 'inventory__item--hbc');
 
@@ -23,7 +23,8 @@ modal_inventory = {
 		hbc_image.src = '/assets/hudsons-bay-company-coin.png';
 		hbc_image.alt = Player.hbc + ' HBC Coin';
 
-		const hbc_total = document.querySelector('span');
+		const hbc_total = document.createElement('span');
+
 		hbc_total.innerText = Player.hbc;
 
 		hbc.appendChild(hbc_image);
