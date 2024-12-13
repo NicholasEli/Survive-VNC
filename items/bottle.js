@@ -1,3 +1,5 @@
+import TYPES from '../types/index.js';
+
 const bottle = function (item) {
 	item.use = function () {
 		const water = Player.inventory.find((item) => item.type == TYPES.ITEMS.WATER);

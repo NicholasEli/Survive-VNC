@@ -9,11 +9,21 @@
 			<div class="inventory-actions__item-title">
 				<p data-el="item-title"></p>
 			</div>
-			<button data-el="item-cancel" type="button" onclick="close_inventory_actions()"></button>
-			<button data-el="item-use" type="button" onclick="use_item()">Use</button>
-			<button data-el="item-craft" type="button" onclick="craft_item()">Craft</button>
-			<button data-el="item-drop" type="button" onclick="drop_item()">Drop</button>
+			<button
+				data-el="item-cancel"
+				type="button"
+				onclick="modal_inventory.close_actions()"
+			></button>
+			<button data-el="item-use" type="button" onclick="modal_inventory.use_item()">
+				Use
+			</button>
+			<button data-el="item-craft" type="button" onclick="modal_craft.craft_item()">
+				Craft
+			</button>
+			<button data-el="item-drop" type="button" onclick="modal_inventory.drop_item()">
+				Drop
+			</button>
 			<p>Dropping items destroys them permenantly</p>
 		</div>
 	</div>
-</div>
+</div>;

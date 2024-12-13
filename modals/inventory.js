@@ -3,7 +3,7 @@ import toast from '../toast.js';
 import container from './container.js';
 import craft from './craft.js';
 
-const inventory = {
+modal_inventory = {
 	ui: function () {
 		const item_title = document.querySelector('[data-el="item-title"]');
 		const title = document.querySelector('[data-el="inventory-title"]');
@@ -47,10 +47,10 @@ const inventory = {
 					return;
 				}
 
-				clear_inventory_actions();
+				modal_inventory.clear_actions();
 
-				if ((!Container && !Item) || (!Container && Item)) {
-					Item = item;
+				if ((!Container && !Selected_Item) || (!Container && Selected_Item)) {
+					Selected_Item = item;
 					if (item.use) {
 						document.body.classList.add('inventory-actions', 'action-use-item');
 					} else {
@@ -72,72 +72,46 @@ const inventory = {
 		this.ui();
 		craft.ui();
 	},
-	open_inventory: function () {
+	open: function () {
 		document.body.classList.add('inventory', 'craft');
-		inventory();
+		modal_inventory.ui();
 	},
-	close_inventory_actions: function () {
+	close_actions: function () {
 		const btns = document.querySelectorAll('[data-inventory-item]');
 
-		Item = null;
+		Selected_Item = null;
 		btns.forEach((btn) => btn.classList.remove('active'));
-		clear_inventory_actions();
+		modal_inventory.clear_actions();
 	},
 	use_item: function () {
-		if (!Player || !Item) return;
+		if (!Player || !Selected_Item) return;
 
-		if (!Item.use) {
+		if (!Selected_Item.use) {
 			toast.danger(TYPES.TOAST.ITEM.UNUSABLE);
 			return;
 		}
 
-		Item.use();
+		Selected_Item.use();
 		this.ui();
-		clear_inventory_actions();
+		modal_inventory.clear_actions();
 		set_attributes();
 	},
 	drop_item: function () {
-		if (!Player || !Item) return;
-		clear_inventory_actions();
-		Player.drop(Item);
+		if (!Player || !Selected_Item) return;
+		modal_inventory.clear_actions();
+		Player.drop(Selected_Item);
 		close_all_modals();
 		this.ui();
 	},
 	return_item: function () {
-		Player.inventory.push(Item);
-		Craft = Craft.filter((item) => item.id != Item.id);
-		Item = null;
+		Player.inventory.push(Selected_Item);
+		Craft = Craft.filter((item) => item.id != Selected_Item.id);
+		Selected_Item = null;
 		craft.ui();
 		this.ui();
 	},
-	craft_item: function () {
-		if (Craft.length >= 3) {
-			toast.danger(TYPES.TOAST.CRAFT.LIMIT);
-			return;
-		}
 
-		Craft.push(Item);
-		Player.inventory = Player.inventory.filter((item) => item.id != Item.id);
-		Item = null;
-		craft.ui();
-		this.ui();
-		clear_inventory_actions();
-	},
-	craft_items: function () {
-		const match = craft.match();
-		if (!match) {
-			toast.danger(TYPES.TOAST.CRAFT.UNUSABLE);
-			return;
-		}
-
-		craft.make();
-		craft.ui();
-		this.ui();
-		close_all_modals();
-		set_attributes();
-	},
-
-	clear_inventory_actions: function () {
+	clear_actions: function () {
 		document.body.classList.remove(
 			'inventory-actions',
 			'action-use-item',
@@ -147,4 +121,4 @@ const inventory = {
 	}
 };
 
-export default inventory;
+export default modal_inventory;

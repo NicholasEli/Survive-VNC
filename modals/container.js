@@ -2,7 +2,7 @@ import TYPES from '../types/index.js';
 import toast from '../toast.js';
 import inventory from './inventory.js';
 
-const container = {
+modal_container = {
 	ui: function () {
 		if (!Container) return;
 
@@ -61,4 +61,4 @@ const container = {
 	}
 };
 
-export default container;
+export default modal_container;

@@ -1,6 +1,7 @@
 import TYPES from '../../types/index.js';
 import Item from '../items/index.js';
 import { uuid, async_timeout } from '../helpers.js';
+import modal_container from '../modals/container.js';
 
 const CAMPFIRE = () => ({
 	id: null,
@@ -134,16 +135,20 @@ const CAMPFIRE = () => ({
 		const _lifecyle = async () => {
 			await async_timeout(5000);
 
-			this.inventory = this.inventory.map((item) => {
-				if (item.type == TYPES.ITEMS.WATER) {
-					this.condition = 0;
-					return;
-				}
-				if (item.type == TYPES.ITEMS.MEAT_RAW) return { ...Item(TYPES.ITEMS.MEAT_COOKED) };
-				if (item.type == TYPES.ITEMS.FIRE || item.type == TYPES.ITEMS.MEAT_COOKED) return item;
-			});
+			this.inventory = this.inventory
+				.map((item) => {
+					if (item.type == TYPES.ITEMS.WATER) {
+						this.condition = 0;
+						return;
+					}
+					if (item.type == TYPES.ITEMS.MEAT_RAW) return { ...Item(TYPES.ITEMS.MEAT_COOKED) };
+					if (item.type == TYPES.ITEMS.FIRE || item.type == TYPES.ITEMS.MEAT_COOKED) return item;
+				})
+				.filter((item) => item != undefined);
 
 			this.condition = this.condition - 10;
+
+			modal_container.ui();
 
 			if (this.condition <= 0) return;
 
@@ -170,7 +175,7 @@ const CAMPFIRE = () => ({
 		}
 
 		Container = this;
-		inventory();
+		modal_inventory.ui();
 		this.active = true;
 		document.body.classList.add('container', 'inventory');
 

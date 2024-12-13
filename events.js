@@ -1,8 +1,8 @@
 import TYPES from './types/index.js';
 import { distance, out_of_bounds } from './helpers.js';
 import toast from './toast.js';
-import inventory from './modals/inventory.js';
-import container from './modals/container.js';
+import modal_inventory from './modals/inventory.js';
+import modal_container from './modals/container.js';
 
 const events = {
 	click: function (scene, target) {
@@ -25,8 +25,8 @@ const events = {
 				}
 
 				const is_open = target.data.toggle(scene);
-				inventory.ui();
-				container.ui();
+				modal_inventory.ui();
+				modal_container.ui();
 				return target;
 			}
 

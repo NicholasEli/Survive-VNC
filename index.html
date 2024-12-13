@@ -23,25 +23,18 @@
 		<link rel="stylesheet" href="./styles/modal-letter.css" />
 
 		<script>
-			clear_inventory_actions = null;
-			close_all_modals = null;
-			close_inventory_actions = null;
 			Container = null;
-			Craft = [];
-			craft_item = null;
-			craft_items = null;
+			Selected_Item = [];
+			Craft_Inventory = [];
 			drop_item = null;
 			Game = null;
-			Item = null;
 			Letter = null;
+			modal_container = null;
+			modal_craft = null;
+			modal_inventory = null;
 			Player = null;
 			Region = null;
-			return_item = null;
 			set_attributes = null;
-			use_item = null;
-			open_inventory = function () {
-				document.body.classList.add('inventory');
-			};
 			close_all_modals = function () {
 				document.body.classList.remove(
 					'container',
@@ -53,16 +46,13 @@
 					'note'
 				);
 
-				if (Craft && Craft.length) {
-					Craft.forEach((item) => {
+				if (Craft_Inventory && Craft_Inventory.length) {
+					Craft_Inventory.forEach((item) => {
 						Player.inventory.push(item);
 					});
 				}
 
 				if (Container) Container.toggle();
-				Container = null;
-				Item = null;
-				Craft = [];
 			};
 		</script>
 
@@ -81,6 +71,8 @@
 
 		<script src="./hud.js" type="module"></script>
 		<script src="./modals/inventory.js" type="module"></script>
+		<script src="./modals/container.js" type="module"></script>
+		<script src="./modals/craft.js" type="module"></script>
 		<script src="./modals/letter.js" type="module"></script>
 	</body>
 </html>

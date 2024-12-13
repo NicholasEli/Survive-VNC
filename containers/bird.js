@@ -84,7 +84,7 @@ const BIRD = () => ({
 		}
 
 		Container = this;
-		inventory();
+		modal_inventory.ui();
 		this.active = true;
 		document.body.classList.add('container');
 
