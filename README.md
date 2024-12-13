@@ -17,21 +17,6 @@
 | Sprain     |
 | Salmonella |
 
-| Items           |
-| --------------- |
-| Ash             |
-| Axe             |
-| Bottle          |
-| Fire            |
-| Firewood        |
-| Letter Blank    |
-| Letter Recevied |
-| Meat Cooked     |
-| Meat Raw        |
-| Rock            |
-| Shovel          |
-| Water           |
-
 | Containers     |
 | -------------- |
 | Bird           |
@@ -48,6 +33,7 @@
 | --------------- |
 | Ash             |
 | Axe             |
+| Backpack        |
 | Bottle          |
 | Fire            |
 | Firewood        |
@@ -57,17 +43,20 @@
 | Meat Raw        |
 | Rag             |
 | Rock            |
+| Sleeping Bag    |
 | Shirt           |
 | Shovel          |
 | Water           |
 
 ### Crafting
 
-| Ingredient 1 | Ingredient 2 | Ingredient 3 | Result     |
-| ------------ | ------------ | ------------ | ---------- |
-| Firewood     | Axe          | Rock         | Campfire   |
-| Bottle       | Water        |              | Wash Hands |
-| Axe          | Shirt        |              | Rags x 3   |
+| Ingredient 1 | Ingredient 2 | Ingredient 3 | Result       |
+| ------------ | ------------ | ------------ | ------------ |
+| Firewood     | Axe          | Rock         | Campfire     |
+| Bottle       | Water        |              | Wash Hands   |
+| Axe          | Shirt        |              | Rags x 3     |
+| Rag          | Rag          | Firewood     | Backpack     |
+| Rag          | Rag          | Shirt        | Sleeping Bag |
 
 Actions
 
