@@ -22,7 +22,7 @@ modal_craft = {
 		if (match && match.ACTION) craftable.innerText = match.ACTION;
 		if (match && match.ITEMS) craftable.innerText = match.ITEMS;
 
-		if (!match) {
+		if (craftable && !match) {
 			craftable.innerText = 'None';
 		}
 
@@ -43,7 +43,7 @@ modal_craft = {
 
 			btn.addEventListener('click', () => {
 				Selected_Item = item;
-				return_item();
+				modal_inventory.return_item();
 			});
 		});
 	},

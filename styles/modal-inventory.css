@@ -25,6 +25,8 @@
 
 .inventory__items::-webkit-scrollbar-track {
 	background-image: url('../assets/modals/scroll-bar.png');
+	background-size: auto 100%;
+	background-repeat: no-repeat;
 }
 
 .inventory__items::-webkit-scrollbar-thumb {
@@ -34,8 +36,8 @@
 }
 
 .inventory__item {
-	width: 3rem;
-	height: 3rem;
+	width: 4rem;
+	height: 4rem;
 	position: relative;
 	padding: 0.5rem;
 	cursor: pointer;
@@ -56,6 +58,18 @@
 
 .inventory__item.active {
 	border: 2px solid var(--purple-700);
+}
+
+.inventory__item--hbc span {
+	position: absolute;
+	right: 0.25rem;
+	bottom: 0.25rem;
+	padding: 0.15rem 0.25rem;
+	font-family: var(--font-arcade);
+	font-size: 1rem;
+	color: #000;
+	background-color: var(--yellow-700);
+	pointer-events: none;
 }
 
 .inventory__actions {

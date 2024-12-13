@@ -16,6 +16,21 @@ modal_inventory = {
 		const wrapper = document.querySelector('[data-el="inventory-items"]');
 		wrapper.innerHTML = '';
 
+		const hbc = document.createElement('div');
+		hbc.classList.add('inventory__item', 'inventory__item--hbc');
+
+		const hbc_image = document.createElement('img');
+		hbc_image.src = '/assets/hudsons-bay-company-coin.png';
+		hbc_image.alt = Player.hbc + ' HBC Coin';
+
+		const hbc_total = document.querySelector('span');
+		hbc_total.innerText = Player.hbc;
+
+		hbc.appendChild(hbc_image);
+		hbc.appendChild(hbc_total);
+
+		wrapper.appendChild(hbc);
+
 		Player.inventory.forEach((item) => {
 			if (!item) return;
 			const btn = document.createElement('button');
@@ -105,7 +120,7 @@ modal_inventory = {
 	},
 	return_item: function () {
 		Player.inventory.push(Selected_Item);
-		Craft = Craft.filter((item) => item.id != Selected_Item.id);
+		Craft_Inventory = Craft_Inventory.filter((item) => item.id != Selected_Item.id);
 		Selected_Item = null;
 		craft.ui();
 		this.ui();

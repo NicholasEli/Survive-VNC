@@ -27,6 +27,7 @@ Player = {
 		{ ...Item(TYPES.ITEMS.WATER) }
 	],
 	backpack: null,
+	hbc: 100,
 	attributes: {
 		health: 100,
 		temperature: 100,
